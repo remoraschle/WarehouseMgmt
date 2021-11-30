@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WarehouseMgmtDB.Model
+{
+    public class ArticleGroup
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        //public virtual ArticleGroup ArticleGroupParent { get; set; }
+        //public int ArticleGroupParentId { get; set; }
+
+
+    }
+}
