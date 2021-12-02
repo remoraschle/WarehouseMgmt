@@ -50,10 +50,15 @@ namespace WarehouseMgmtDB.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ArticleGroupParentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ArticleGroupParentId");
 
                     b.ToTable("ArticleGroups");
                 });
@@ -150,6 +155,16 @@ namespace WarehouseMgmtDB.Migrations
                     b.Navigation("ArticleGroup");
                 });
 
+            modelBuilder.Entity("WarehouseMgmtDB.Model.ArticleGroup", b =>
+                {
+                    b.HasOne("WarehouseMgmtDB.Model.ArticleGroup", "ParentArticleGroup")
+                        .WithMany("subGroups")
+                        .HasForeignKey("ArticleGroupParentId")
+                        .OnDelete(DeleteBehavior.ClientNoAction);
+
+                    b.Navigation("ParentArticleGroup");
+                });
+
             modelBuilder.Entity("WarehouseMgmtDB.Model.OrderPositions", b =>
                 {
                     b.HasOne("WarehouseMgmtDB.Model.Article", "Article")
@@ -178,6 +193,11 @@ namespace WarehouseMgmtDB.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("OrderPositions");
+                });
+
+            modelBuilder.Entity("WarehouseMgmtDB.Model.ArticleGroup", b =>
+                {
+                    b.Navigation("subGroups");
                 });
 #pragma warning restore 612, 618
         }
