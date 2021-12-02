@@ -26,5 +26,16 @@ namespace WarehouseMgmtDB
             optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<ArticleGroup>()
+                .HasMany(p => p.subGroups)
+                .WithOne(p => p.ParentArticleGroup)
+                .OnDelete(DeleteBehavior.ClientNoAction)
+                .HasForeignKey(p => p.ArticleGroupParentId);
+
+        }
+
     }
 }
