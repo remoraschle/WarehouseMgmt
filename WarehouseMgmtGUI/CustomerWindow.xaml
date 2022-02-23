@@ -1,0 +1,35 @@
+﻿<Window x:Class="WarehouseMgmtGUI.Customer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarehouseMgmtGUI"
+        mc:Ignorable="d"
+        Title="Customer" >
+    <Window.DataContext>
+        <local:CustomerWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel Grid.Row="1" Margin="0,18,0,0">
+            <Label x:Name="lblCustomerNumber" Content="KundenNr:"></Label>
+            <TextBox x:Name="txtCustomerNumber" HorizontalAlignment="Left" Text="{Binding CustomerNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="lblCustomerName" Content="Name:"></Label>
+            <TextBox x:Name="txtCustomerName" HorizontalAlignment="Left" Text="{Binding CustomerName}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="lblCustomerStreet" Content="Strasse:"></Label>
+            <TextBox x:Name="txtCustomerSteet" HorizontalAlignment="Left" Text="{Binding CustomerStreet}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="lblCustomerPLZ" Content="PLZ:"></Label>
+            <TextBox x:Name="txtCustomerPLZ" HorizontalAlignment="Left" Text="{Binding CustomerPLZ}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="lblCustomerLocation" Content="Ort:"></Label>
+            <TextBox x:Name="txtCustomerLocation" HorizontalAlignment="Left" Text="{Binding CustomerLocation}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="lblCustomerMail" Content="E-Mail:"></Label>
+            <TextBox x:Name="txtCustomerMail" HorizontalAlignment="Left" Text="{Binding CustomerMail}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="lblCustomerWebsite" Content="Website:"></Label>
+            <TextBox x:Name="txtCustomerWebsite" HorizontalAlignment="Left" Text="{Binding CustomerWebsite}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="lblCustomerPw" Content="Passwort:"></Label>
+            <TextBox x:Name="txtCustomerPw" HorizontalAlignment="Left" Text="{Binding CustomerPW}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="lblSaveTest" Content="{Binding SaveTest}"></Label>
+            <Button x:Name="btnCustomerSave" Content="Speichern" Command="{Binding SaveCommand}"/>
+            <Button x:Name="btnCustomerDelete" Content="Löschen" Command="{Binding DeleteCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
