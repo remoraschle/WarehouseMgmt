@@ -91,6 +91,18 @@ namespace WarehouseMgmtDB.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("ValidFromUTC")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("SYSUTCDATETIME()");
+
+                    b.Property<DateTime?>("ValidToUTC")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("CONVERT(DATETIME2, '9999-12-31 23:59:59.9999999')");
+
                     b.Property<string>("Zip")
                         .HasColumnType("nvarchar(max)");
 

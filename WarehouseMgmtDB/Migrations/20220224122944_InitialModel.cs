@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WarehouseMgmtDB.Migrations
 {
-    public partial class init : Migration
+    public partial class InitialModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,7 +39,9 @@ namespace WarehouseMgmtDB.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Mail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ValidFromUTC = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "SYSUTCDATETIME()"),
+                    ValidToUTC = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "CONVERT(DATETIME2, '9999-12-31 23:59:59.9999999')")
                 },
                 constraints: table =>
                 {
@@ -138,6 +140,9 @@ namespace WarehouseMgmtDB.Migrations
                 name: "IX_Orders_OrderPositionsId",
                 table: "Orders",
                 column: "OrderPositionsId");
+
+
+            migrationBuilder.Sql(TemporalTablesExtensions.GetEnableTemporalTableSql("Customers"));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

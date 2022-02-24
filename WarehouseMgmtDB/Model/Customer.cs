@@ -17,5 +17,7 @@ namespace WarehouseMgmtDB.Model
         public string Mail { get; set; }
         public string Url { get; set; }
         public string Password { get; set; }
+        public DateTime? ValidFromUTC { get; }
+        public DateTime? ValidToUTC { get; }
     }
 }
