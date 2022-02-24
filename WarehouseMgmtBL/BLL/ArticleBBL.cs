@@ -45,5 +45,15 @@ namespace WarehouseMgmtBL
         //    return EntityManager.GetArticle();
         //}
 
+
+        /// <summary>
+        /// inserts a new article into the databse using the values passed-in; returns the Article id of the newly inserted record
+        /// </summary>
+        public int AddArticle(string name, decimal price)
+        {
+            EntityManager entity = new EntityManager();
+            return entity.AddArticle(name, price);
+        }
+
     }
 }

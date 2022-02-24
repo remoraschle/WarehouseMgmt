@@ -13,7 +13,7 @@ namespace WarehouseMgmtDB
         {
             using (var context = new WarehouseContext())
             {
-                var sqlvalues = context.Articles;
+                var sqlvalues = context.Articles.Select(x=>x);
 
                 List<Article> articleList = new List<Article>();
 
@@ -21,6 +21,11 @@ namespace WarehouseMgmtDB
                 {
                     foreach (var item in sqlvalues)
                     {
+                        using (var context2 = new WarehouseContext())
+                        {
+                            item.ArticleGroup = context2.ArticleGroups.Where(x => x.Id == item.ArticleGroupId).FirstOrDefault(); //todooooo
+                        }
+                            
                         articleList.Add(item);
                     }
                 }
@@ -45,7 +50,7 @@ namespace WarehouseMgmtDB
         }
 
 
-        public void AddArticle()
+        public int AddArticle(string name, decimal price)
         {
             using (var context = new WarehouseContext())
             {
@@ -56,13 +61,16 @@ namespace WarehouseMgmtDB
 
                 var article1 = new Article()
                 {
-                    Name = "Article1",
+                    Name = name,
+                    Price = price,
                     ArticleGroup = articlegroup1
                 };
 
 
                 context.Articles.Add(article1);
                 context.SaveChanges();
+
+                return article1.Id;
             }
         }
     }
