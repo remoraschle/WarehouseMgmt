@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace WarehouseMgmtGUI
 {
-    class DelegateCommand : ICommand
+    public class DelegateCommand : ICommand
     {
         readonly Action<object> execute;
         readonly Predicate<object> canExecute;

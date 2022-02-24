@@ -11,24 +11,34 @@
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="397*"></RowDefinition>
-            <RowDefinition Height="37*"></RowDefinition>
-            <RowDefinition Height="397*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="379*"></ColumnDefinition>
-            <ColumnDefinition Width="421*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0">
-            <Button x:Name="btnCustomerNew" Content="Neuer Kunde" Click="btnCustomerNew_Click"/>
-            <Button x:Name="btnCustomerEdit" Content="Kunde bearbeiten" Click="btnCustomerEdit_Click"/>
+            <Button x:Name="btnCustomerNew" Content="Neuer Kunde" Command="{Binding CustomerCommand}"/>
+            <Button x:Name="btnCustomerEdit" Content="Kunde bearbeiten" Command="{Binding CustomerCommand}"/>
         </StackPanel>
-        <WrapPanel Grid.Row="1">
-            <TextBox x:Name="txtSearch" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnSearch" Content="Suchen"/>
+        <StackPanel Grid.Row="1">
+            <TextBox x:Name="txtSearchName" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtSearchAdress" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="btnSearch" Content="Suchen" Command="{Binding SearchCommand}"/>
+        </StackPanel>
+        <WrapPanel Grid.Row="2">
+            
+            
         </WrapPanel>
         
-        <DataGrid Grid.Row="2"></DataGrid>
+        <DataGrid Grid.Row="3"></DataGrid>
 
     </Grid>
 </Window>
