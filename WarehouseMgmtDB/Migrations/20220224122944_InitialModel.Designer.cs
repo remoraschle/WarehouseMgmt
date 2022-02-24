@@ -10,8 +10,8 @@ using WarehouseMgmtDB;
 namespace WarehouseMgmtDB.Migrations
 {
     [DbContext(typeof(WarehouseContext))]
-    [Migration("20211202120714_init")]
-    partial class init
+    [Migration("20220224122944_InitialModel")]
+    partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,6 +92,18 @@ namespace WarehouseMgmtDB.Migrations
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ValidFromUTC")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("SYSUTCDATETIME()");
+
+                    b.Property<DateTime?>("ValidToUTC")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("CONVERT(DATETIME2, '9999-12-31 23:59:59.9999999')");
 
                     b.Property<string>("Zip")
                         .HasColumnType("nvarchar(max)");

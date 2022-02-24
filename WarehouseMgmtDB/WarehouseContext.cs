@@ -35,6 +35,23 @@ namespace WarehouseMgmtDB
                 .OnDelete(DeleteBehavior.ClientNoAction)
                 .HasForeignKey(p => p.ArticleGroupParentId);
 
+
+            modelBuilder.Entity<Customer>().HasKey(x => x.Id);
+
+            modelBuilder.Entity<Customer>().Property(x => x.ValidFromUTC)
+                                         .IsRequired()
+                                         .ValueGeneratedOnAddOrUpdate()
+                                         .HasDefaultValueSql("SYSUTCDATETIME()");
+
+            modelBuilder.Entity<Customer>().Property(x => x.ValidToUTC)
+                                         .IsRequired()
+                                         .ValueGeneratedOnAddOrUpdate()
+                                         .HasDefaultValueSql("CONVERT(DATETIME2, '9999-12-31 23:59:59.9999999')");
+
+
+
+            base.OnModelCreating(modelBuilder);
+
         }
 
     }
