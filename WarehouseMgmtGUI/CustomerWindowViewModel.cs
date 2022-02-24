@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace WarehouseMgmtGUI
 {
-    class CustomerWindowViewModel :INotifyPropertyChanged
+    class CustomerWindowViewModel : BaseViewModel
     {
         public CustomerWindowViewModel()
         {
@@ -36,18 +36,7 @@ namespace WarehouseMgmtGUI
         public string CustomerWebsite { get; set; }
         public string CustomerPW { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (!string.IsNullOrEmpty(propertyName))
-            {
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-      
+   
 
         string saveTest;
         public string SaveTest

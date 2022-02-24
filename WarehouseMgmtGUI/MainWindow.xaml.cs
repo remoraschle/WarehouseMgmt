@@ -29,16 +29,5 @@ namespace WarehouseMgmtGUI
             //entityManager.AddArticle();
         }
 
-        private void btnCustomerNew_Click(object sender, RoutedEventArgs e)
-        {
-            Customer customer = new Customer();
-            customer.Show();
-        }
-
-        private void btnCustomerEdit_Click(object sender, RoutedEventArgs e)
-        {
-            Customer customer = new Customer();
-            customer.Show();
-        }
     }
 }
