@@ -54,8 +54,8 @@
             <Label Content="Price" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.Price}"/>
 
-            <Label Content="ArticleGroup" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.ArticleGroup}"/>
+            <Label Content="ArticleGroupName" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.ArticleGroupName}"/>
 
             <Label Content="ArticleGroupId" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <TextBox Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.ArticleGroupId}"/>

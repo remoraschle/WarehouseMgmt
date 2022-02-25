@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WarehouseMgmtBL;
-using WarehouseMgmtDB.Model;
 
 namespace WarehouseMgmtGUI
 {
@@ -23,7 +22,7 @@ namespace WarehouseMgmtGUI
                     int id = art.AddArticle(newArticle.Name, newArticle.Price);
                     newArticle.Id = id;
                     this.Articles.Add(newArticle);
-                    NewArticle = new Article();
+                    NewArticle = new ArticleBBL();
 
                    
                 });
@@ -35,8 +34,8 @@ namespace WarehouseMgmtGUI
                     ArticleBBL art = new ArticleBBL();
 
                     var list = art.GetArticles();
-                    this.Articles = null;
-                    foreach (Article item in list)
+                    this.Articles = new ObservableCollection<ArticleBBL>();
+                    foreach (ArticleBBL item in list)
                     {
                         this.Articles.Add(item);
                     }
@@ -45,9 +44,9 @@ namespace WarehouseMgmtGUI
 
         }
 
-        Article newArticle = new Article();
+        ArticleBBL newArticle = new ArticleBBL();
 
-        public Article NewArticle
+        public ArticleBBL NewArticle
         {
             get => newArticle;
             set
@@ -60,9 +59,9 @@ namespace WarehouseMgmtGUI
             }
         }
 
-        private ObservableCollection<Article> articles = new ObservableCollection<Article>();
+        private ObservableCollection<ArticleBBL> articles = new ObservableCollection<ArticleBBL>();
 
-        public ObservableCollection<Article> Articles
+        public ObservableCollection<ArticleBBL> Articles
         {
             get => articles;
             set

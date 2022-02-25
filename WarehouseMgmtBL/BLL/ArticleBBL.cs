@@ -10,30 +10,56 @@ namespace WarehouseMgmtBL
 {
     public class ArticleBBL
     {
+
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int ArticleGroupId { get; set; }
+        public string ArticleGroupName { get; set; }
+
         /// <summary>
         /// returns all articles
         /// </summary>
-        public List<Article> GetArticles()
+        public List<ArticleBBL> GetArticles()
         {
-            return EntityManager.GetArticle();
+            List<Article> article =  EntityManager.GetArticle();
+
+            List<ArticleBBL> list = new List<ArticleBBL>();
+
+            foreach (var v in article)
+            {
+                ArticleBBL articleBBL = new ArticleBBL();
+                articleBBL.Id = v.Id;
+                articleBBL.Name = v.Name;
+                articleBBL.Price = v.Price;
+                articleBBL.ArticleGroupId = v.ArticleGroupId;
+                articleBBL.ArticleGroupName = "Test"; //v.ArticleGroup.Name; // TODO
+
+                list.Add(articleBBL);
+            }
+
+            return list;
+
         }
 
         /// <summary>
         /// returns the article with the specifed article id
         /// </summary>
         /// <param name="id"></param>
-        public Article GetArticleByArticleID(int id)
+        public ArticleBBL GetArticleByArticleID(int id)
         {
-            return EntityManager.GetArticle(id);
+            return (ArticleBBL)EntityManager.GetArticle(id);
         }
+
+       
 
         /// <summary>
         /// returns all articles with Articlename like name
         /// </summary>
         /// <param name="name"></param>
-        public Article GetArticleByArticleName(string name)
+        public ArticleBBL GetArticleByArticleName(string name)
         {
-            return EntityManager.GetArticle(name);
+            return (ArticleBBL)EntityManager.GetArticle(name);
         }
 
         ///// <summary>
@@ -54,6 +80,20 @@ namespace WarehouseMgmtBL
             EntityManager entity = new EntityManager();
             return entity.AddArticle(name, price);
         }
+
+
+        public static explicit operator ArticleBBL(Article v)
+        {
+            ArticleBBL articleBBL = new ArticleBBL();
+            articleBBL.Id = v.Id;
+            articleBBL.Name = v.Name;
+            articleBBL.Price = v.Price;
+            articleBBL.ArticleGroupId = v.ArticleGroupId;
+            articleBBL.ArticleGroupName = v.ArticleGroup.Name;
+
+            return articleBBL;
+        }
+
 
     }
 }
