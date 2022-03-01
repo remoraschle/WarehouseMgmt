@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WarehouseMgmtDB;
 
 namespace WarehouseMgmtGUI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für ArticleWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ArticleWindow : Window
     {
-        public MainWindow()
+        public ArticleWindow()
         {
             InitializeComponent();
-
-            //EntityManager entityManager = new EntityManager();
-            //entityManager.AddArticle();
         }
-
     }
 }

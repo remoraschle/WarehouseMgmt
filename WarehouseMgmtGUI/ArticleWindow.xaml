@@ -1,0 +1,69 @@
+﻿<Window x:Class="WarehouseMgmtGUI.ArticleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarehouseMgmtGUI"
+        mc:Ignorable="d"
+        Title="ArticleWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:ArticleWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="400*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <ListBox ItemsSource="{Binding Articles}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Price}" Margin="0,0,0,5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="300*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Id" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.Id}"/>
+
+            <Label Content="Name" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.Name}"/>
+
+            <Label Content="Price" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.Price}"/>
+
+            <Label Content="ArticleGroupName" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.ArticleGroupName}"/>
+
+            <Label Content="ArticleGroupId" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.ArticleGroupId}"/>
+
+            <Button Grid.Row="5" Grid.Column="1" Content="Add Article" Margin="0,0,5,0" Command="{Binding AddArticleCommand}"/>
+            <Button Grid.Row="7" Grid.Column="1" Content="List all" Margin="0,0,5,0" Command="{Binding ListArticleCommand}"/>
+
+        </Grid>
+
+    </Grid>
+</Window>
