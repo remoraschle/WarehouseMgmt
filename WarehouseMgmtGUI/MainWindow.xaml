@@ -29,8 +29,8 @@
             <Button x:Name="btnCustomerEdit" Content="Kunde bearbeiten" Command="{Binding CustomerCommand}"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <TextBox x:Name="txtSearchName" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="txtSearchAdress" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtSearchName" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtSearchAdress" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="Visible" UndoLimit="93"/>
             <Button x:Name="btnSearch" Content="Suchen" Command="{Binding SearchCommand}"/>
         </StackPanel>
         <WrapPanel Grid.Row="2">

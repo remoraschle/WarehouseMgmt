@@ -33,6 +33,12 @@ namespace WarehouseMgmtDB
                 return articleList;
             }
         }
+
+        public static List<Customer> GetCustomers()
+        {
+            throw new NotImplementedException();
+        }
+
         public static Article GetArticle(int id)
         {
             using (var context = new WarehouseContext())

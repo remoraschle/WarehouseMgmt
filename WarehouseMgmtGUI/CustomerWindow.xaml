@@ -5,31 +5,90 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WarehouseMgmtGUI"
         mc:Ignorable="d"
-        Title="Customer" >
+        Title="Customer" Height="450" Width="800">
     <Window.DataContext>
         <local:CustomerWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <StackPanel Grid.Row="1" Margin="0,18,0,0">
-            <Label x:Name="lblCustomerNumber" Content="KundenNr:"></Label>
-            <TextBox x:Name="txtCustomerNumber" HorizontalAlignment="Left" Text="{Binding CustomerNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="lblCustomerName" Content="Name:"></Label>
-            <TextBox x:Name="txtCustomerName" HorizontalAlignment="Left" Text="{Binding CustomerName}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="lblCustomerStreet" Content="Strasse:"></Label>
-            <TextBox x:Name="txtCustomerSteet" HorizontalAlignment="Left" Text="{Binding CustomerStreet}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="lblCustomerPLZ" Content="PLZ:"></Label>
-            <TextBox x:Name="txtCustomerPLZ" HorizontalAlignment="Left" Text="{Binding CustomerPLZ}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="lblCustomerLocation" Content="Ort:"></Label>
-            <TextBox x:Name="txtCustomerLocation" HorizontalAlignment="Left" Text="{Binding CustomerLocation}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="lblCustomerMail" Content="E-Mail:"></Label>
-            <TextBox x:Name="txtCustomerMail" HorizontalAlignment="Left" Text="{Binding CustomerMail}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="lblCustomerWebsite" Content="Website:"></Label>
-            <TextBox x:Name="txtCustomerWebsite" HorizontalAlignment="Left" Text="{Binding CustomerWebsite}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="lblCustomerPw" Content="Passwort:"></Label>
-            <TextBox x:Name="txtCustomerPw" HorizontalAlignment="Left" Text="{Binding CustomerPW}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="lblSaveTest" Content="{Binding SaveTest}"></Label>
-            <Button x:Name="btnCustomerSave" Content="Speichern" Command="{Binding SaveCommand}" Margin="1,1,1,1" />
-            <Button x:Name="btnCustomerDelete" Content="Löschen" Command="{Binding DeleteCommand}" Margin="1,1,1,1"/>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400*"></ColumnDefinition>
+            <ColumnDefinition Width="400*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <!--CustomerBLL muss noch implementiertund Bindings angepasst werden-->
+        
+        <!--<ListBox ItemsSource="{Binding Articles}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Price}" Margin="0,0,0,5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>-->
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="11*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Content="Customer number" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding CustomerNumber}"/>
+
+            <Label Content="Name" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding CustomerName}"/>
+
+            <Label Content="Street" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding CustomerStreet}"/>
+
+            <Label Content="ZIP code" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding CustomerPLZ}"/>
+
+            <Label Content="City" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding CustomerLocation}"/>
+
+            <Label Content="E-Mail" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding CustomerMail}"/>
+
+            <Label Content="Website" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding CustomerWebsite}"/>
+
+            <Label Content="Password" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding CustomerPW}" />
+            
+            <!--<Label x:Name="lblSaveTest" Grid.Row="9" Content="{Binding SaveTest}"></Label>      Für was?--> 
+            
+            <Button Content="Add Customer" Grid.Row="10" Grid.Column="2" Command="{Binding SaveCommand}"/>
+            
+            <Button Content="Search Customer" Grid.Row="12" Grid.Column="2" Command="{Binding SearchCommand}"/> <!--Command noch anpassen-->
+
+            <Button Content="Change Customer" Grid.Row="14" Grid.Column="2" Command="{Binding ChangeCommand}"/> <!--Command noch anpassen-->
+
+            <Button Content="Delete Customer" Grid.Row="16" Grid.Column="2" Command="{Binding DeleteCommand}"/>
+        </Grid>
+        
     </Grid>
 </Window>
