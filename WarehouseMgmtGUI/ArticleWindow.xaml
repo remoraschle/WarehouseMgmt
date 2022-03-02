@@ -36,7 +36,7 @@
             <Label Content="Name" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
             <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding NewArticle.SearchArticleName}"/>
 
-            <Button Content="Search Customer" Grid.Row="2" Grid.Column="1" Command="{Binding SearchArticleCommand}"/>
+            <Button Content="Search Article" Grid.Row="2" Grid.Column="1" Command="{Binding SearchArticleCommand}"/>
         </Grid>
 
 

@@ -25,7 +25,7 @@ namespace WarehouseMgmtBL
 
             if (id != null && name == null)
             {
-                Customer firstCustomer = EntityManager.GetFirstCustomer((int)id);
+                Customer firstCustomer = EntityManagerCustomer.GetFirstCustomer((int)id);
                 if (firstCustomer != null)
                 {
                     customer.Add(firstCustomer);
@@ -41,16 +41,16 @@ namespace WarehouseMgmtBL
                 {
                     if (name.Trim() == "")
                     {
-                        customer = EntityManager.GetAllCustomer();
+                        customer = EntityManagerCustomer.GetAllCustomer();
                     }
                     else
                     {
-                        customer = EntityManager.GetAllCustomer(name);
+                        customer = EntityManagerCustomer.GetAllCustomer(name);
                     }
                 }
                 else
                 {
-                    customer = EntityManager.GetAllCustomer();
+                    customer = EntityManagerCustomer.GetAllCustomer();
                 }
             }
 
@@ -86,7 +86,7 @@ namespace WarehouseMgmtBL
         /// <param name="id"></param>
         public CustomerBLL GetCustomerByCustomerID(int id)
         {
-            return (CustomerBLL)EntityManager.GetFirstCustomer(id);
+            return (CustomerBLL)EntityManagerCustomer.GetFirstCustomer(id);
         }
 
 
@@ -98,7 +98,7 @@ namespace WarehouseMgmtBL
         /// </summary>
         public int AddCustomer(string firstName, string lastName, string street, string zip, string city, string mail, string url, string password)
         {
-            EntityManager entity = new EntityManager();
+            EntityManagerCustomer entity = new EntityManagerCustomer();
             return entity.AddCustomer(firstName, lastName,street, zip, city, mail, url , password);
         }
         public int AddCustomer(string firstName, string lastName)
@@ -113,7 +113,7 @@ namespace WarehouseMgmtBL
         /// </summary>
         public bool EditCustomer(CustomerBLL customer)
         {
-            EntityManager entity = new EntityManager();
+            EntityManagerCustomer entity = new EntityManagerCustomer();
             return entity.EditCustomer(customer);
         }
 
@@ -123,7 +123,7 @@ namespace WarehouseMgmtBL
         /// </summary>
         public bool DeleteCustomer(CustomerBLL customer)
         {
-            EntityManager entity = new EntityManager();
+            EntityManagerCustomer entity = new EntityManagerCustomer();
             return entity.DeleteCustomer(customer);
         }
     }

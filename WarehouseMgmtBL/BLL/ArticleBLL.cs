@@ -27,7 +27,7 @@ namespace WarehouseMgmtBL
 
             if (id != null && name == null)
             {
-                Article firstArticle = EntityManager.GetFirstArticle((int)id);
+                Article firstArticle = EntityManagerArticle.GetFirstArticle((int)id);
                 if (firstArticle != null)
                 {
                     article.Add(firstArticle);
@@ -43,16 +43,16 @@ namespace WarehouseMgmtBL
                 {
                     if (name.Trim() == "")
                     {
-                        article = EntityManager.GetAllArticle();
+                        article = EntityManagerArticle.GetAllArticle();
                     }
                     else
                     {
-                        article = EntityManager.GetAllArticle(name);
+                        article = EntityManagerArticle.GetAllArticle(name);
                     }
                 }
                 else
                 {
-                    article = EntityManager.GetAllArticle();
+                    article = EntityManagerArticle.GetAllArticle();
                 }
             }
                
@@ -84,7 +84,7 @@ namespace WarehouseMgmtBL
         /// <param name="id"></param>
         public ArticleBLL GetArticleByArticleID(int id)
         {
-            return (ArticleBLL)EntityManager.GetFirstArticle(id);
+            return (ArticleBLL)EntityManagerArticle.GetFirstArticle(id);
         }
 
        
@@ -95,7 +95,7 @@ namespace WarehouseMgmtBL
         /// <param name="name"></param>
         public ArticleBLL GetArticleByArticleName(string name)
         {
-            return (ArticleBLL)EntityManager.GetFirstArticle(name);
+            return (ArticleBLL)EntityManagerArticle.GetFirstArticle(name);
         }
 
 
@@ -116,7 +116,7 @@ namespace WarehouseMgmtBL
         /// </summary>
         public int AddArticle(string name, decimal price)
         {
-            EntityManager entity = new EntityManager();
+            EntityManagerArticle entity = new EntityManagerArticle();
             return entity.AddArticle(name, price);
         }
 
@@ -126,7 +126,7 @@ namespace WarehouseMgmtBL
         /// </summary>
         public bool EditArticle(ArticleBLL article)
         {
-            EntityManager entity = new EntityManager();
+            EntityManagerArticle entity = new EntityManagerArticle();
             return entity.EditArticle(article);
         }
 
@@ -136,7 +136,7 @@ namespace WarehouseMgmtBL
         /// </summary>
         public bool DeleteArticle(ArticleBLL article)
         {
-            EntityManager entity = new EntityManager();
+            EntityManagerArticle entity = new EntityManagerArticle();
             return entity.DeleteArticle(article);
         }
 

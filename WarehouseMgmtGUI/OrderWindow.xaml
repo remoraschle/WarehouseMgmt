@@ -6,34 +6,58 @@
         xmlns:local="clr-namespace:WarehouseMgmtGUI"
         mc:Ignorable="d"
         Title="OrderWindow" Height="450" Width="800">
-    
-    <!--OrderWindow ViewModel muss noch hinzugefügt werden-->
-    
-    <!--<Window.DataContext>
+
+    <Window.DataContext>
         <local:OrderWindowViewModel/>
-    </Window.DataContext>-->
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400*"/>
-            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+
         </Grid.ColumnDefinitions>
-    
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="300*"></RowDefinition>
+        </Grid.RowDefinitions>
 
-    <!--OrdersBLL muss noch implementiertund Bindings angepasst werden-->
+        <Grid Grid.Row="0" Grid.Column="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="11*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+                <RowDefinition Height="20px"></RowDefinition>
+            </Grid.RowDefinitions>
 
-    <!--<ListBox ItemsSource="{Binding Articles}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding Price}" Margin="0,0,0,5"/>
-                </StackPanel>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>-->
+            <Label Content="Order number" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding NewOrder.SearchOrderNumber}"/>
 
-    <Grid Grid.Column="1">
+            <Label Content="Date" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <DatePicker Grid.Row="1" Grid.Column="2" Text="{Binding NewOrder.SearchOrderDate}" />
+
+            <Button Content="Search Order" Grid.Row="2" Grid.Column="1" Command="{Binding SearchOrderCommand}"/>
+
+        </Grid>
+
+
+
+        <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding LastName}" Margin="0,0,0,5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+        <Grid Grid.Column="1" Grid.Row="2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="11*"/>
@@ -57,31 +81,26 @@
             <RowDefinition Height="20px"/>
         </Grid.RowDefinitions>
             <Label Content="Order number"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NewArticle.Id}"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NewOrder.Id}"/>
 
             <Label Content="Date"  Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NewArticle.Id}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NewOrder.Date}"/>
 
-            <Label Content="Customer"  Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NewArticle.Id}"/>
+            <Label Content="Order"  Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NewOrder.Id}"/>
 
             <Label Content="Position number"  Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding NewArticle.Id}"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding NewOrder.Id}"/>
 
-            <Label Content="Article"  Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding NewArticle.Id}"/>
+            <Label Content="Order"  Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding NewOrder.Id}"/>
 
             <Label Content="Quantity"  Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding NewArticle.Id}"/>
+            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding NewOrder.Id}"/>
 
-            <Button Grid.Row="8" Grid.Column="1" Content="Add Order" Margin="0,0,5,0" Command="{Binding AddArticleCommand}"/>
-            <!--Command noch anpassen-->
-            <Button Grid.Row="10" Grid.Column="1" Content="Search Order" Margin="0,0,5,0" Command="{Binding ListArticleCommand}"/>
-            <!--Command noch anpassen-->
-            <Button Grid.Row="12" Grid.Column="1" Content="Change Order" Margin="0,0,5,0" Command="{Binding ChangeCommand}"/>
-            <!--Command noch anpassen-->
-            <Button Grid.Row="14" Grid.Column="1" Content="Delete Order" Margin="0,0,5,0" Command="{Binding DeleteCommand}"/>
-            <!--Command noch anpassen-->
+            <Button Grid.Row="8" Grid.Column="1" Content="Add Order" Margin="0,0,5,0" Command="{Binding AddOrderCommand}"/>
+            <Button Grid.Row="10" Grid.Column="1" Content="Change Order" Margin="0,0,5,0" Command="{Binding SaveOrderCommand}"/>
+            <Button Grid.Row="12" Grid.Column="1" Content="Delete Order" Margin="0,0,5,0" Command="{Binding DeleteOrderCommand}"/>
         </Grid>
     </Grid>    
 </Window>
