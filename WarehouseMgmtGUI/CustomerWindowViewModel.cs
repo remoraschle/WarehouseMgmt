@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace WarehouseMgmtGUI
 {
-    class CustomerWindowViewModel : BaseViewModel
+    public class CustomerWindowViewModel : NotifyableBaseObject
     {
         public CustomerWindowViewModel()
         {
@@ -24,11 +24,13 @@ namespace WarehouseMgmtGUI
             CustomerPW = "1234";
 
             this.SaveCommand = new DelegateCommand((o) => SaveCustomer());
+
+            this.SearchCustomerCommand = new DelegateCommand((o) => SearchCustomer());
         }
 
         public DelegateCommand SaveCommand { get; set; }
-        public DelegateCommand SearchCustomer { get; set; }
-        public DelegateCommand ChangeCustomer { get; set; }
+        public DelegateCommand SearchCustomerCommand { get; set; }
+        public DelegateCommand ChangeCustomerCommand { get; set; }
         public DelegateCommand DeleteCommand { get; set; }
 
         public int CustomerNumber { get; set; }
@@ -40,6 +42,9 @@ namespace WarehouseMgmtGUI
         public string CustomerWebsite { get; set; }
         public string CustomerPW { get; set; }
 
+
+        public int SearchCustomerNumber { get; set; }
+        public string SearchCustomerName { get; set; }
    
 
         string saveTest;
@@ -59,27 +64,54 @@ namespace WarehouseMgmtGUI
 
         private void SaveCustomer()
         {
-            //this.SaveTest = "gespeichert"; //test
-
-            //ManageArticle ma = new ManageArticle();
-            //ma.SetArticle();
+            //CustomerBLL art = new CustomerBLL();
+            //int id = art.AddCusomer(newCustomer.Name, newCustomer.Price);
+            //newCustomer.Id = id;
+            //this.Customers.Add(newCustomer);
+            //NewCustomer = new CustomerBLL();
         }
 
-        //Customer BLL/BBL :) muss noch implementiert werden
+        private void SearchCustomer()
+        {
+            //CustomerBLL cust = new CustomerBLL();
 
-        //private ObservableCollection<CustomerBLL> customers = new ObservableCollection<CustomerBLL>();
+            //var list = cust.GetCustomers();
+            //this.Customers = new ObservableCollection<CustomerBLL>();
+            //foreach (CustomerBLL item in list)
+            //{
+            //    this.Customers.Add(item);
+            //}
+        }
 
-        //public ObservableCollection<CustomerBLL> Articles
-        //{
-        //    get => customers;
-        //    set
-        //    {
-        //        if (customers != value)
-        //        {
-        //            customers = value;
-        //            this.RaisePropertyChanged();
-        //        }
-        //    }
-        //}
+
+        CustomerBLL newCustomer = new CustomerBLL();
+
+        public CustomerBLL NewCustomer
+        {
+            get => newCustomer;
+            set
+            {
+                if (newCustomer != value)
+                {
+                    newCustomer = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+        private ObservableCollection<CustomerBLL> customers = new ObservableCollection<CustomerBLL>();
+
+        public ObservableCollection<CustomerBLL> Customers
+        {
+            get => customers;
+            set
+            {
+                if (customers != value)
+                {
+                    customers = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
     }
 }

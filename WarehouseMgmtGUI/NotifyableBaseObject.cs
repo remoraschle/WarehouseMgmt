@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseMgmtGUI
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class NotifyableBaseObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
