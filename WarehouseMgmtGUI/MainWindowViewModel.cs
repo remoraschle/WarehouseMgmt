@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarehouseMgmtGUI
 {
-    public class MainWindowViewModel : BaseViewModel
+    public class MainWindowViewModel : NotifyableBaseObject
     {
         public MainWindowViewModel()
         {
