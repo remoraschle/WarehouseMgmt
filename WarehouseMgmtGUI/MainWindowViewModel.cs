@@ -50,6 +50,18 @@ namespace WarehouseMgmtGUI
                 customer.AddCustomer("Sebastian", "Vettel");
                 customer.AddCustomer("Albert", "Einstein");
 
+
+
+                ArticleBLL article = new ArticleBLL();
+                article.AddArticle("Rahmspinat", (decimal)5.25);
+                article.AddArticle("Pilz Suppe", (decimal)3.42);
+                article.AddArticle("IceTee", (decimal)2.99);
+                article.AddArticle("OrangeTee", (decimal)2.89);
+                article.AddArticle("Pizza", (decimal)8);
+                article.AddArticle("Nudeln", (decimal)1.11);
+                article.AddArticle("Wasser", (decimal)0.25);
+
+
             });
 
         }
