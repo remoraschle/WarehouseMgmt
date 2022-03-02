@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using WarehouseMgmtBL;
+using System.Collections.ObjectModel;
 
 namespace WarehouseMgmtGUI
 {
@@ -26,6 +27,8 @@ namespace WarehouseMgmtGUI
         }
 
         public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand SearchCustomer { get; set; }
+        public DelegateCommand ChangeCustomer { get; set; }
         public DelegateCommand DeleteCommand { get; set; }
 
         public int CustomerNumber { get; set; }
@@ -61,5 +64,22 @@ namespace WarehouseMgmtGUI
             //ManageArticle ma = new ManageArticle();
             //ma.SetArticle();
         }
+
+        //Customer BLL/BBL :) muss noch implementiert werden
+
+        //private ObservableCollection<CustomerBLL> customers = new ObservableCollection<CustomerBLL>();
+
+        //public ObservableCollection<CustomerBLL> Articles
+        //{
+        //    get => customers;
+        //    set
+        //    {
+        //        if (customers != value)
+        //        {
+        //            customers = value;
+        //            this.RaisePropertyChanged();
+        //        }
+        //    }
+        //}
     }
 }

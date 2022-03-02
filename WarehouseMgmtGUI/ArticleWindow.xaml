@@ -15,7 +15,6 @@
             <ColumnDefinition Width="400*"/>
         </Grid.ColumnDefinitions>
 
-
         <ListBox ItemsSource="{Binding Articles}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -35,33 +34,41 @@
                 <ColumnDefinition Width="11*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="300*"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
             </Grid.RowDefinitions>
-            <Label Content="Id" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.Id}"/>
+            <Label Content="Id"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NewArticle.Id}"/>
 
-            <Label Content="Name" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.Name}"/>
+            <Label Content="Name" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NewArticle.Name}"/>
 
-            <Label Content="Price" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.Price}"/>
+            <Label Content="Price" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NewArticle.Price}"/>
 
-            <Label Content="ArticleGroupName" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.ArticleGroupName}"/>
+            <Label Content="Articlegroupname" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding NewArticle.ArticleGroupName}"/>
 
-            <Label Content="ArticleGroupId" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Margin="0,5,5,0" Text="{Binding NewArticle.ArticleGroupId}"/>
+            <Label Content="Articlegroup Id" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding NewArticle.ArticleGroupId}"/>
 
-            <Button Grid.Row="5" Grid.Column="1" Content="Add Article" Margin="0,0,5,0" Command="{Binding AddArticleCommand}"/>
-            <Button Grid.Row="7" Grid.Column="1" Content="List all" Margin="0,0,5,0" Command="{Binding ListArticleCommand}"/>
+            <Button Grid.Row="7" Grid.Column="1" Content="Add Article" Margin="0,0,5,0" Command="{Binding AddArticleCommand}"/>
+            <Button Grid.Row="9" Grid.Column="1" Content="Search Article" Margin="0,0,5,0" Command="{Binding ListArticleCommand}"/>
+            <Button Grid.Row="11" Grid.Column="1" Content="Change Article" Margin="0,0,5,0" Command="{Binding ChangeCommand}"/> <!--Command noch anpassen-->
+            <Button Grid.Row="13" Grid.Column="1" Content="Delete Article" Margin="0,0,5,0" Command="{Binding DeleteCommand}"/> <!--Command noch anpassen-->
 
         </Grid>
 
