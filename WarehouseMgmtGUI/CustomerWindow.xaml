@@ -32,28 +32,27 @@
             </Grid.RowDefinitions>
 
             <Label Content="Customer number" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding SearchCustomerNumber}"/>
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding NewCustomer.SearchCustomerNumber}"/>
 
             <Label Content="Name" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding SearchCustomerName}"/>
+            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.SearchCustomerName}"/>
 
-            <Button Content="Search Article" Grid.Row="2" Grid.Column="1" Command="{Binding SearchCustomerCommand}"/> <!--Command noch anpassen-->
+            <Button Content="Search Customers" Grid.Row="2" Grid.Column="1" Command="{Binding SearchCustomerCommand}"/> <!--Command noch anpassen-->
         </Grid>
-        
 
-        <!--CustomerBLL muss noch implementiertund Bindings angepasst werden-->
-        
-        <!--<ListBox ItemsSource="{Binding Articles}">
+
+
+        <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding Price}" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding LastName}" Margin="0,0,0,5"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>-->
+        </ListBox>
 
         <Grid Grid.Column="1" Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -82,36 +81,39 @@
             </Grid.RowDefinitions>
 
             <Label Content="Customer number" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding CustomerNumber}"/>
+            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.Id}"/>
 
-            <Label Content="Name" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding CustomerName}"/>
+            <Label Content="First Name" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding NewCustomer.FirstName}"/>
 
-            <Label Content="Street" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding CustomerStreet}"/>
+            <Label Content="Last Name" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding NewCustomer.LastName}"/>
 
-            <Label Content="ZIP code" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding CustomerPLZ}"/>
+            <Label Content="Street" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding NewCustomer.Street}"/>
 
-            <Label Content="City" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding CustomerLocation}"/>
+            <Label Content="ZIP code" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding NewCustomer.Zip}"/>
 
-            <Label Content="E-Mail" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding CustomerMail}"/>
+            <Label Content="City" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding NewCustomer.City}"/>
 
-            <Label Content="Website" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding CustomerWebsite}"/>
+            <Label Content="E-Mail" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding NewCustomer.Mail}"/>
 
-            <Label Content="Password" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding CustomerPW}" />
+            <Label Content="Website" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding NewCustomer.Url}"/>
+
+            <Label Content="Password" Grid.Row="9" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
+            <TextBox Grid.Row="9" Grid.Column="2" Text="{Binding NewCustomer.Password}"  />
             
             <!--<Label x:Name="lblSaveTest" Grid.Row="9" Content="{Binding SaveTest}"></Label>      Für was?--> 
             
-            <Button Content="Add Customer" Grid.Row="10" Grid.Column="2" Command="{Binding SaveCommand}"/>
+            <Button Content="Add Customer" Grid.Row="11" Grid.Column="2" Command="{Binding AddCustomerCommand}"/>
             
             
 
-            <Button Content="Change Customer" Grid.Row="14" Grid.Column="2" Command="{Binding ChangeCommand}"/> <!--Command noch anpassen-->
+            <Button Content="Change Customer" Grid.Row="14" Grid.Column="2" Command="{Binding SaveCustomerCommand}"/> <!--Command noch anpassen-->
 
             <Button Content="Delete Customer" Grid.Row="16" Grid.Column="2" Command="{Binding DeleteCommand}"/>
         </Grid>
