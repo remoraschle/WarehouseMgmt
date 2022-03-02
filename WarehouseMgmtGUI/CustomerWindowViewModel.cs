@@ -14,75 +14,72 @@ namespace WarehouseMgmtGUI
     {
         public CustomerWindowViewModel()
         {
-            CustomerNumber = 1;
-            CustomerName = "Name";
-            CustomerStreet = "Strasse";
-            CustomerPLZ = "1111";
-            CustomerLocation = "SG";
-            CustomerMail = "Max.Mustermann@gmail.com";
-            CustomerWebsite = "google.ch";
-            CustomerPW = "1234";
-
-            this.SaveCommand = new DelegateCommand((o) => SaveCustomer());
-
-            this.SearchCustomerCommand = new DelegateCommand((o) => SearchCustomer());
-        }
-
-        public DelegateCommand SaveCommand { get; set; }
-        public DelegateCommand SearchCustomerCommand { get; set; }
-        public DelegateCommand ChangeCustomerCommand { get; set; }
-        public DelegateCommand DeleteCommand { get; set; }
-
-        public int CustomerNumber { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerStreet { get; set; }
-        public string CustomerPLZ { get; set; }
-        public string CustomerLocation { get; set; }
-        public string CustomerMail { get; set; }
-        public string CustomerWebsite { get; set; }
-        public string CustomerPW { get; set; }
-
-
-        public int SearchCustomerNumber { get; set; }
-        public string SearchCustomerName { get; set; }
-   
-
-        string saveTest;
-        public string SaveTest
-        {
-            get => saveTest;
-            set
+            this.AddCustomerCommand = new DelegateCommand((o) =>
             {
-                if (saveTest != value)
+                //Will be called on button click
+
+                CustomerBLL art = new CustomerBLL();
+                int id = art.AddCustomer(newCustomer.FirstName,newCustomer.LastName, newCustomer.Street, newCustomer.Zip, newCustomer.City, newCustomer.Mail, newCustomer.Url, newCustomer.Password);
+                newCustomer.Id = id;
+                this.Customers.Add(newCustomer);
+                NewCustomer = new CustomerBLL();
+
+
+            });
+
+            this.SaveCustomerCommand = new DelegateCommand((o) =>
+            {
+                //Will be called on button click
+
+                if (selectedCustomer != null)
                 {
-                    saveTest = value;
-                    this.RaisePropertyChanged();
-                    this.SaveCommand.RaiseCanExecuteChanged(); 
+                    bool save = selectedCustomer.EditCustomer(newCustomer);
+
+
+                    //// Daten werden in der Liste nicht aktualisiert. Dafür müsste man in der CustomerBLL ebenfalls eine RaisePropertyChanged() implementieren
+                    //var a = Customers.FirstOrDefault(x => x == selectedCustomer);
+                    //a.Name = newCustomer.Name;
+                    //a.Price = newCustomer.Price;
+
+                    NewCustomer = new CustomerBLL();
                 }
-            }
+            });
+
+            this.SearchCustomerCommand = new DelegateCommand((o) =>
+            {
+                //Will be called on button click
+
+                CustomerBLL cust = new CustomerBLL();
+
+                var list = cust.GetCustomer(newCustomer.SearchCustomerNumber, newCustomer.SearchCustomerName);
+
+                this.Customers = new ObservableCollection<CustomerBLL>();
+
+                if (list != null)
+                {
+                    foreach (CustomerBLL item in list)
+                    {
+                        this.Customers.Add(item);
+                    }
+                }
+            });
+
+            this.DeleteCustomerCommand = new DelegateCommand((o) =>
+            {
+                //Will be called on button click
+
+                if (selectedCustomer != null)
+                {
+                    bool save = selectedCustomer.DeleteCustomer(newCustomer);
+
+                    Customers.Remove(selectedCustomer);
+
+                    NewCustomer = new CustomerBLL();
+                }
+            });
+
+
         }
-
-        private void SaveCustomer()
-        {
-            //CustomerBLL art = new CustomerBLL();
-            //int id = art.AddCusomer(newCustomer.Name, newCustomer.Price);
-            //newCustomer.Id = id;
-            //this.Customers.Add(newCustomer);
-            //NewCustomer = new CustomerBLL();
-        }
-
-        private void SearchCustomer()
-        {
-            //CustomerBLL cust = new CustomerBLL();
-
-            //var list = cust.GetCustomers();
-            //this.Customers = new ObservableCollection<CustomerBLL>();
-            //foreach (CustomerBLL item in list)
-            //{
-            //    this.Customers.Add(item);
-            //}
-        }
-
 
         CustomerBLL newCustomer = new CustomerBLL();
 
@@ -94,6 +91,39 @@ namespace WarehouseMgmtGUI
                 if (newCustomer != value)
                 {
                     newCustomer = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+
+        CustomerBLL selectedCustomer = new CustomerBLL();
+
+        public CustomerBLL SelectedCustomer
+        {
+            get => selectedCustomer;
+            set
+            {
+                if (selectedCustomer != value)
+                {
+                    selectedCustomer = value;
+
+                    if (selectedCustomer != null)
+                    {
+                        NewCustomer = new CustomerBLL
+                        {
+                            Id = selectedCustomer.Id,
+                            FirstName = selectedCustomer.FirstName,
+                            LastName = selectedCustomer.LastName,
+                            Street = selectedCustomer.Street,
+                            Zip = selectedCustomer.Zip,
+                            City = selectedCustomer.City,
+                            Mail = selectedCustomer.Mail,
+                            Url = selectedCustomer.Url,
+                            Password = selectedCustomer.Password
+                        };
+                    }
+
                     this.RaisePropertyChanged();
                 }
             }
@@ -113,5 +143,10 @@ namespace WarehouseMgmtGUI
                 }
             }
         }
+
+        public DelegateCommand AddCustomerCommand { get; set; }
+        public DelegateCommand SaveCustomerCommand { get; set; }
+        public DelegateCommand SearchCustomerCommand { get; set; }
+        public DelegateCommand DeleteCustomerCommand { get; set; }
     }
 }
