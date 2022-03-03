@@ -29,5 +29,6 @@ namespace WarehouseMgmtGUI
             //entityManager.AddArticle();
         }
 
+
     }
 }

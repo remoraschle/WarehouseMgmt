@@ -53,15 +53,21 @@ namespace WarehouseMgmtGUI
                 customer.AddCustomer("Albert", "Einstein");
 
 
+                ArticleGroupBLL articleGroupBLL = new ArticleGroupBLL();
+                int foodGroup = articleGroupBLL.AddArticleGroup("Food", null);
+                int fluidGroup = articleGroupBLL.AddArticleGroup("Fluid", foodGroup);
+                int solidGroup = articleGroupBLL.AddArticleGroup("Solid", foodGroup);
+                int randomGroup = articleGroupBLL.AddArticleGroup("Somthingelse", null);
 
                 ArticleBLL article = new ArticleBLL();
-                article.AddArticle("Rahmspinat", (decimal)5.25);
-                article.AddArticle("Pilz Suppe", (decimal)3.42);
-                article.AddArticle("IceTee", (decimal)2.99);
-                article.AddArticle("OrangeTee", (decimal)2.89);
-                article.AddArticle("Pizza", (decimal)8);
-                article.AddArticle("Nudeln", (decimal)1.11);
-                article.AddArticle("Wasser", (decimal)0.25);
+                article.AddArticle("Rahmspinat", (decimal)5.25, solidGroup);
+                article.AddArticle("Pilz Suppe", (decimal)3.42, fluidGroup);
+                article.AddArticle("IceTee", (decimal)2.99, fluidGroup);
+                article.AddArticle("OrangeTee", (decimal)2.89, fluidGroup);
+                article.AddArticle("Pizza", (decimal)8, solidGroup);
+                article.AddArticle("Nudeln", (decimal)1.11, solidGroup);
+                article.AddArticle("Wasser", (decimal)0.25, fluidGroup);
+                article.AddArticle("Tisch", (decimal)552.68, randomGroup);
 
 
             });

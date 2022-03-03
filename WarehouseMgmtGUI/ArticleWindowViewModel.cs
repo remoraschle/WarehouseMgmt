@@ -18,7 +18,7 @@ namespace WarehouseMgmtGUI
                     //Will be called on button click
 
                     ArticleBLL art = new ArticleBLL();
-                    int id = art.AddArticle(newArticle.Name, newArticle.Price);
+                    int id = art.AddArticle(newArticle.Name, newArticle.Price, newArticle.ArticleGroupId);
                     newArticle.Id = id;
                     this.Articles.Add(newArticle);
                     NewArticle = new ArticleBLL();
