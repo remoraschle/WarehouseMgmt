@@ -32,7 +32,7 @@
             </Grid.RowDefinitions>
 
             <Label Content="Customer number" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding NewCustomer.SearchCustomerNumber}"/>
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding NewCustomer.SearchCustomerNumber}" PreviewTextInput="NumberValidationTextBox"/>
 
             <Label Content="Name" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
             <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.SearchCustomerName}"/>
@@ -81,7 +81,7 @@
             </Grid.RowDefinitions>
 
             <Label Content="Customer number" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
-            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.Id}"/>
+            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding NewCustomer.Id}" IsEnabled="False"/>
 
             <Label Content="First Name" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
             <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding NewCustomer.FirstName}"/>

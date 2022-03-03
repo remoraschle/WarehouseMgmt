@@ -25,6 +25,8 @@ namespace WarehouseMgmtGUI
 
             this.ArticleGroupsCommand = new DelegateCommand((o) =>
             {
+                ArticleGroupWindow articleGroupWindow = new ArticleGroupWindow();
+                articleGroupWindow.Show();
 
             });
 
