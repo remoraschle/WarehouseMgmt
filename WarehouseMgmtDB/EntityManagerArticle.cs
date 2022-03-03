@@ -70,6 +70,14 @@ namespace WarehouseMgmtDB
             }
         }
 
+        public string GetArticleGroupName(int articleGroupId)
+        {
+            using (var context = new WarehouseContext())
+            {
+                return context.ArticleGroups.Where(x => x.Id == articleGroupId).Select(x => x.Name).FirstOrDefault();
+            }
+        }
+
 
         public int AddArticle(string name, decimal price)
         {
@@ -104,7 +112,7 @@ namespace WarehouseMgmtDB
                 article.Name = articleChanges.Name;
                 article.Price = articleChanges.Price;
                 //article.ArticleGroup = articleChanges.ArticleGroup;
-                //article.ArticleGroupId = articleChanges.ArticleGroupId;
+                article.ArticleGroupId = articleChanges.ArticleGroupId;
 
                 int count = context.SaveChanges();
                 if (count > 0)

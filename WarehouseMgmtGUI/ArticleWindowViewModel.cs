@@ -10,6 +10,7 @@ namespace WarehouseMgmtGUI
 {
     public class ArticleWindowViewModel : NotifyableBaseObject
     {
+
         public ArticleWindowViewModel()
         {
             this.AddArticleCommand = new DelegateCommand((o) =>
@@ -29,17 +30,42 @@ namespace WarehouseMgmtGUI
             {
                 //Will be called on button click
 
-                if (selectedArticle != null)
+                if (SelectedArticle != null)
                 {
-                    bool save = selectedArticle.EditArticle(newArticle);
+                    bool save = SelectedArticle.EditArticle(NewArticle);
+
+                    NewArticle = new ArticleBLL
+                    {
+                        Id = NewArticle.Id,
+                        Name = NewArticle.Name,
+                        Price = NewArticle.Price,
+                        ArticleGroupId = NewArticle.ArticleGroupId,
+                        ArticleGroupName = NewArticle.ArticleGroupName,
+                        ArticleGroup = NewArticle.ArticleGroup
+                    };
 
 
-                    //// Daten werden in der Liste nicht aktualisiert. Dafür müsste man in der ArticleBLL ebenfalls eine RaisePropertyChanged() implementieren
-                    //var a = Articles.FirstOrDefault(x => x == selectedArticle);
-                    //a.Name = newArticle.Name;
-                    //a.Price = newArticle.Price;
+                    //Data in the ListBox are not updating, because there shoud also be a RaisePropertyChanged in ArticleBLL on each Object
+                    //therefore we just reload the whole List :-D
 
-                    NewArticle = new ArticleBLL();
+                    ArticleBLL art = new ArticleBLL();
+
+                    var list = art.GetArticles(newArticle.SearchArticleNumber, newArticle.SearchArticleName);
+
+                    this.Articles = new ObservableCollection<ArticleBLL>();
+
+                    if (list != null)
+                    {
+                        foreach (ArticleBLL item in list)
+                        {
+                            this.Articles.Add(item);
+                        }
+                    }
+
+
+                    //Reselect after reloading the list
+                    SelectedArticle = NewArticle;
+
                 }
             });
 
@@ -49,7 +75,8 @@ namespace WarehouseMgmtGUI
 
                     ArticleBLL art = new ArticleBLL();
 
-                    var list = art.GetArticles(newArticle.SearchArticleNumber, newArticle.SearchArticleName);
+                    
+                    var list = art.GetArticles(NewArticle.SearchArticleNumber, NewArticle.SearchArticleName);
 
                     this.Articles = new ObservableCollection<ArticleBLL>();
 
@@ -74,6 +101,27 @@ namespace WarehouseMgmtGUI
 
                     NewArticle = new ArticleBLL();
                 }
+            });
+
+            this.SelectArticleGroupCommand = new DelegateCommand((o) =>
+            {
+                //Will be called on button click
+                if (NewArticle != null && NewArticle.Id != 0)
+                {
+                    ArticleGroupWindow articleGroupWindow = new ArticleGroupWindow(NewArticle);
+                    articleGroupWindow.ShowDialog();
+
+                    NewArticle = new ArticleBLL
+                    {
+                        Id = NewArticle.Id,
+                        Name = NewArticle.Name,
+                        Price = NewArticle.Price,
+                        ArticleGroupId = NewArticle.ArticleGroupId,
+                        ArticleGroupName = NewArticle.ArticleGroupName,
+                        ArticleGroup = NewArticle.ArticleGroup
+                    };
+                }
+                
             });
 
 
@@ -114,6 +162,7 @@ namespace WarehouseMgmtGUI
                             Name = selectedArticle.Name,
                             Price = selectedArticle.Price,
                             ArticleGroupId = selectedArticle.ArticleGroupId,
+                            ArticleGroupName = selectedArticle.ArticleGroupName,
                             ArticleGroup = selectedArticle.ArticleGroup
                         };
                     }
@@ -142,6 +191,7 @@ namespace WarehouseMgmtGUI
         public DelegateCommand SaveArticleCommand { get; set; }
         public DelegateCommand SearchArticleCommand { get; set; }
         public DelegateCommand DeleteArticleCommand { get; set; }
+        public DelegateCommand SelectArticleGroupCommand { get; set; }
 
     }
 }

@@ -14,7 +14,33 @@ namespace WarehouseMgmtBL
     {
         public string ArticleGroupName { get; set; }
         public int? SearchArticleNumber { get; set; }
+
+        string searchArticleNumberString;
+        public string SearchArticleNumberString
+        {
+            get => searchArticleNumberString;
+            set
+            {
+                if (searchArticleNumberString != value)
+                {
+                    searchArticleNumberString = value;
+
+                    int number;
+                    bool check = int.TryParse(value, out number);
+                    if (check)
+                    {
+                        SearchArticleNumber = number;
+                    }
+                    else
+                    {
+                        SearchArticleNumber = null;
+                    }
+                }
+            }
+        }
+
         public string SearchArticleName { get; set; }
+        public bool SetChange { get; set; }
 
 
 
@@ -59,6 +85,7 @@ namespace WarehouseMgmtBL
             
 
             List<ArticleBLL> list = new List<ArticleBLL>();
+            EntityManagerArticle entityManagerArticle = new EntityManagerArticle();
 
             foreach (var v in article)
             {
@@ -67,7 +94,9 @@ namespace WarehouseMgmtBL
                 articleBLL.Name = v.Name;
                 articleBLL.Price = v.Price;
                 articleBLL.ArticleGroupId = v.ArticleGroupId;
-                articleBLL.ArticleGroupName = "Test"; //v.ArticleGroup.Name; // TODO
+
+                
+                articleBLL.ArticleGroupName = entityManagerArticle.GetArticleGroupName(articleBLL.ArticleGroupId);//v.ArticleGroup.Name; --> Not possible because of Lazy loading
 
                 list.Add(articleBLL);
             }
