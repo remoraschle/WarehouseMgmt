@@ -143,10 +143,10 @@ namespace WarehouseMgmtBL
         /// <summary>
         /// inserts a new article into the databse using the values passed-in; returns the Article id of the newly inserted record
         /// </summary>
-        public int AddArticle(string name, decimal price)
+        public int AddArticle(string name, decimal price, int articleGroupId)
         {
             EntityManagerArticle entity = new EntityManagerArticle();
-            return entity.AddArticle(name, price);
+            return entity.AddArticle(name, price, articleGroupId);
         }
 
 

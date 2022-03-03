@@ -79,27 +79,30 @@ namespace WarehouseMgmtDB
         }
 
 
-        public int AddArticle(string name, decimal price)
+        public int AddArticle(string name, decimal price, int articleGroupId)
         {
             using (var context = new WarehouseContext())
             {
-                var articlegroup1 = new ArticleGroup()
-                {
-                    Name = "ArticleGroup1"
-                };
+                int articleGroupCount = context.ArticleGroups.Where(x => x.Id == articleGroupId).Count();
 
-                var article1 = new Article()
+                var articlegroup = new ArticleGroup();
+                if (articleGroupCount > 0)
+                {
+                    articlegroup = context.ArticleGroups.Where(x => x.Id == articleGroupId).FirstOrDefault();
+                }
+
+                var article = new Article()
                 {
                     Name = name,
                     Price = price,
-                    ArticleGroup = articlegroup1
+                    ArticleGroup = articlegroup
                 };
 
 
-                context.Articles.Add(article1);
+                context.Articles.Add(article);
                 context.SaveChanges();
 
-                return article1.Id;
+                return article.Id;
             }
         }
 
