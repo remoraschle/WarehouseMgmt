@@ -18,6 +18,7 @@ namespace WarehouseMgmtDB
             return dbSet.FromSqlRaw<T>($"SELECT * FROM dbo.[{tableName}] FOR SYSTEM_TIME ALL WHERE Id = {{0}}  ORDER BY ValidFromUTC", id).AsNoTracking().AsQueryable();
         }
 
+
         public static string GetEnableTemporalTableSql(string tableName) =>
             $@"ALTER TABLE [dbo].[{tableName}] ADD PERIOD FOR SYSTEM_TIME (ValidFromUTC, ValidToUTC)
                GO

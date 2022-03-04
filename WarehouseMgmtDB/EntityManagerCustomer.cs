@@ -142,8 +142,14 @@ namespace WarehouseMgmtDB
             }
         }
 
+        //public static List<Customer> GetHistoryAtTime(int id, DateTime time)
+        //{
+        //    using (var context = new WarehouseContext())
+        //    {
+        //        return context.FromExpression<Customer>($"SELECT * FROM dbo.[Customer] FOR SYSTEM_TIME AS OF {{0}} WHERE Id = {{1}} ORDER BY ValidFromUTC", time.ToUniversalTime(), id).tolist();
+        //    }
+        //}
 
-   
     }
 }
 
