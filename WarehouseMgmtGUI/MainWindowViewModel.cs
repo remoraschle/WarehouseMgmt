@@ -39,7 +39,8 @@ namespace WarehouseMgmtGUI
 
             this.ViewsCommand = new DelegateCommand((o) =>
             {
-                var test = EntityManagerLists.GetBills();
+                BillViewWindow billViewWindow = new BillViewWindow();
+                billViewWindow.Show();
 
             });
 
