@@ -14,6 +14,6 @@ namespace WarehouseMgmtDB.Model
         public int CustomerId { get; set; }
      
         public virtual List<OrderPositions> OrderPositions { get; set; }
-        public int? OrderPositionsId { get; set; }
+        //public int? OrderPositionsId { get; set; }
     }
 }

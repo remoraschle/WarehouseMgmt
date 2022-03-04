@@ -72,7 +72,7 @@ namespace WarehouseMgmtGUI
 
 
                 OrderBLL orderBLL = new OrderBLL();
-                orderBLL.AddOrder(DateTime.Now, customer1, null);
+                orderBLL.AddOrder(DateTime.Now, customer1);
 
 
             });

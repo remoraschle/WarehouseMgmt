@@ -62,7 +62,6 @@ namespace WarehouseMgmtBL
                 orderBLL.Date = v.Date;
                 orderBLL.CustomerId = v.CustomerId;
                 orderBLL.CustomerName = EntityManagerOrder.GetOrderCustomerFullName(v.CustomerId);
-                orderBLL.OrderPositionsId = v.OrderPositionsId;
 
                 list.Add(orderBLL);
             }
@@ -101,10 +100,10 @@ namespace WarehouseMgmtBL
         /// <summary>
         /// inserts a new order into the databse using the values passed-in; returns the Order id of the newly inserted record
         /// </summary>
-        public int AddOrder(DateTime Date,int CustomerId,int? OrderPositionsId)
+        public int AddOrder(DateTime Date,int CustomerId)
         {
             EntityManagerOrder entity = new EntityManagerOrder();
-            return entity.AddOrder(Date, CustomerId, OrderPositionsId);
+            return entity.AddOrder(Date, CustomerId);
         }
 
 

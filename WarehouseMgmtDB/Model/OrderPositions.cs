@@ -26,12 +26,6 @@ namespace WarehouseMgmtDB.Model
         [ForeignKey("ArticleId")]
         public virtual Article Article { get; set; }
 
-        //public virtual Orders Orders { get; set; }
-
-
-
-        // public virtual Article Article { get; set; }
-
 
         public int Quantity { get; set; }
 
