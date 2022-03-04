@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WarehouseMgmtBL;
+using WarehouseMgmtDB;
 
 namespace WarehouseMgmtGUI
 {
@@ -38,7 +39,8 @@ namespace WarehouseMgmtGUI
 
             this.ViewsCommand = new DelegateCommand((o) =>
             {
-                
+                var test = EntityManagerLists.GetBills();
+
             });
 
             this.TestDataCommand = new DelegateCommand((o) =>
@@ -90,6 +92,7 @@ namespace WarehouseMgmtGUI
 
             });
 
+
         }
 
         public DelegateCommand CustomerCommand { get; set; }
@@ -100,7 +103,6 @@ namespace WarehouseMgmtGUI
         public DelegateCommand TestDataCommand { get; set; }
 
 
-    
 
 
     }
