@@ -1,5 +1,11 @@
 # WarehouseMgmt
 
+## instruction
+
+www.youtube.com/.........
+
+
+
 ## SQL - Reqursive Hierarchy for ArticleGroups
 ```md
 
