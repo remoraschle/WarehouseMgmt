@@ -44,7 +44,7 @@ namespace WarehouseMgmtGUI
             this.TestDataCommand = new DelegateCommand((o) =>
             {
                 CustomerBLL customer = new CustomerBLL();
-                customer.AddCustomer("Max", "Muster", "Habichtstrasse 40", "9220","Bischofszell", "Max.Muster@gmx.ch", "www.Max.com", "34sssssss");
+                int customer1 = customer.AddCustomer("Max", "Muster", "Habichtstrasse 40", "9220","Bischofszell", "Max.Muster@gmx.ch", "www.Max.com", "34sssssss");
                 customer.AddCustomer("Tasd", "Ass", "JStasse 33", "9220", "Bischofszell", "Adasdf@gmx.ch", "www.rttg.com", "asdfasdf");
                 customer.AddCustomer("Tss", "JHhh", "Haltstrasse 74", "9220", "Bischofszell", "asdfr@gmx.ch", "www.asdf.com", "sdbdf");
                 customer.AddCustomer("ASss", "Addh", "Neinstrasse 12", "9220", "Bischofszell", "bdnfgr@gmx.ch", "www.jfhmfgh.com", "asdvrweg");
@@ -68,6 +68,11 @@ namespace WarehouseMgmtGUI
                 article.AddArticle("Nudeln", (decimal)1.11, solidGroup);
                 article.AddArticle("Wasser", (decimal)0.25, fluidGroup);
                 article.AddArticle("Tisch", (decimal)552.68, randomGroup);
+
+
+
+                OrderBLL orderBLL = new OrderBLL();
+                orderBLL.AddOrder(DateTime.Now, customer1, null);
 
 
             });

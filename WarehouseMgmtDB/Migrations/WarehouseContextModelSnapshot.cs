@@ -113,10 +113,8 @@ namespace WarehouseMgmtDB.Migrations
 
             modelBuilder.Entity("WarehouseMgmtDB.Model.OrderPositions", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ArticleId")
                         .HasColumnType("int");
@@ -124,7 +122,7 @@ namespace WarehouseMgmtDB.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("OrderId", "ArticleId");
 
                     b.HasIndex("ArticleId");
 
@@ -150,8 +148,6 @@ namespace WarehouseMgmtDB.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("OrderPositionsId");
 
                     b.ToTable("Orders");
                 });
@@ -185,7 +181,15 @@ namespace WarehouseMgmtDB.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WarehouseMgmtDB.Model.Orders", "Orders")
+                        .WithMany("OrderPositions")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Article");
+
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("WarehouseMgmtDB.Model.Orders", b =>
@@ -196,18 +200,17 @@ namespace WarehouseMgmtDB.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WarehouseMgmtDB.Model.OrderPositions", "OrderPositions")
-                        .WithMany()
-                        .HasForeignKey("OrderPositionsId");
-
                     b.Navigation("Customer");
-
-                    b.Navigation("OrderPositions");
                 });
 
             modelBuilder.Entity("WarehouseMgmtDB.Model.ArticleGroup", b =>
                 {
                     b.Navigation("subGroups");
+                });
+
+            modelBuilder.Entity("WarehouseMgmtDB.Model.Orders", b =>
+                {
+                    b.Navigation("OrderPositions");
                 });
 #pragma warning restore 612, 618
         }

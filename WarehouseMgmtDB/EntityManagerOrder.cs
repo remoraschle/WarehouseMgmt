@@ -105,6 +105,35 @@ namespace WarehouseMgmtDB
             }
         }
 
+
+        //public int AddOrder(DateTime date, int customerId, List<OrderPositions> orderPositions)
+        //{
+        //    using (var context = new WarehouseContext())
+        //    {
+        //        foreach (var item in orderPositions)
+        //        {
+        //            var op = new OrderPositions()
+        //            {
+        //                ArticleId = item.ArticleId,
+        //                Quantity = item.Quantity
+        //            };
+        //        }
+
+        //        var order = new Orders()
+        //        {
+        //            Date = date,
+        //            CustomerId = customerId,
+        //            OrderPositionsId = orderPositionsId
+        //        };
+
+
+        //        context.Orders.Add(order);
+        //        context.SaveChanges();
+
+        //        return order.Id;
+        //    }
+        //}
+
         public bool EditOrder(Orders orderChanges)
         {
             using (var context = new WarehouseContext())
