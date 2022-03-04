@@ -85,17 +85,7 @@ namespace WarehouseMgmtBL
 
    
 
-        
-
-        ///// <summary>
-        ///// returns all orders with the OrderGroupId
-        ///// </summary>
-        ///// <param name="orderGroupId"></param>
-        //public Order GetOrderByOrderGroupId(int orderGroupId)
-        //{
-        //    return EntityManager.GetOrder();
-        //}
-
+     
 
         /// <summary>
         /// inserts a new order into the databse using the values passed-in; returns the Order id of the newly inserted record
@@ -104,6 +94,24 @@ namespace WarehouseMgmtBL
         {
             EntityManagerOrder entity = new EntityManagerOrder();
             return entity.AddOrder(Date, CustomerId);
+        }
+
+        public int AddArticlesToOrder(List<OrderPositionsBLL> orderPositionsBLL)
+        {
+            List<OrderPositions> orderPositionsList = new List<OrderPositions>();
+
+            foreach (var item in orderPositionsBLL)
+            {
+                OrderPositions orderPositions = new OrderPositions();
+
+                orderPositions.OrderId = item.OrderId;
+                orderPositions.ArticleId = item.ArticleId;
+                orderPositions.Quantity = item.Quantity;
+                orderPositionsList.Add(orderPositions);
+            }
+
+            EntityManagerOrder entity = new EntityManagerOrder();
+            return entity.AddArticlesToOrder(orderPositionsList);
         }
 
 
