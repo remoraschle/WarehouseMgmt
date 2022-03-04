@@ -36,6 +36,16 @@ namespace WarehouseMgmtDB
                 .HasForeignKey(p => p.ArticleGroupParentId);
 
 
+            //modelBuilder.Entity<OrderPositions>()
+            //    .HasNoKey()
+            //    .HasOne(p=>p.Orders)
+            //    .WithOne(p => p.OrderPositions)
+            //    .OnDelete(DeleteBehavior.Cascade)
+            //    .HasForeignKey<Orders>(p=>p.Id);
+
+
+            modelBuilder.Entity<OrderPositions>().HasKey(x => new { x.OrderId, x.ArticleId });
+
             modelBuilder.Entity<Customer>().HasKey(x => x.Id);
 
             modelBuilder.Entity<Customer>().Property(x => x.ValidFromUTC)

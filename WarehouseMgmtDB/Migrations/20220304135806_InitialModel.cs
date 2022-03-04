@@ -32,7 +32,7 @@ namespace WarehouseMgmtDB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FristName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Zip = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -70,26 +70,6 @@ namespace WarehouseMgmtDB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderPositions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ArticleId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderPositions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OrderPositions_Articles_ArticleId",
-                        column: x => x.ArticleId,
-                        principalTable: "Articles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -97,7 +77,7 @@ namespace WarehouseMgmtDB.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
-                    OrderPositionsId = table.Column<int>(type: "int", nullable: false)
+                    OrderPositionsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -108,10 +88,29 @@ namespace WarehouseMgmtDB.Migrations
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderPositions",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderPositions", x => new { x.OrderId, x.ArticleId });
                     table.ForeignKey(
-                        name: "FK_Orders_OrderPositions_OrderPositionsId",
-                        column: x => x.OrderPositionsId,
-                        principalTable: "OrderPositions",
+                        name: "FK_OrderPositions_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderPositions_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -136,23 +135,11 @@ namespace WarehouseMgmtDB.Migrations
                 table: "Orders",
                 column: "CustomerId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_OrderPositionsId",
-                table: "Orders",
-                column: "OrderPositionsId");
-
-
             migrationBuilder.Sql(TemporalTablesExtensions.GetEnableTemporalTableSql("Customers"));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
-
             migrationBuilder.DropTable(
                 name: "OrderPositions");
 
@@ -160,7 +147,13 @@ namespace WarehouseMgmtDB.Migrations
                 name: "Articles");
 
             migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
                 name: "ArticleGroups");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
         }
     }
 }
