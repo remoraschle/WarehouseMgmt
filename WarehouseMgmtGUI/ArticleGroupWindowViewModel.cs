@@ -61,7 +61,7 @@ namespace WarehouseMgmtGUI
 
         }
 
-            ArticleGroupBLL newArticleGroup = new ArticleGroupBLL();
+        ArticleGroupBLL newArticleGroup = new ArticleGroupBLL();
 
         public ArticleGroupBLL NewArticleGroup
         {

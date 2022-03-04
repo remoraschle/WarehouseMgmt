@@ -13,7 +13,7 @@ namespace WarehouseMgmtGUI
         {
             this.CustomerCommand = new DelegateCommand((o) =>
             {
-                Customer customer = new Customer();
+                CustomerWindow customer = new CustomerWindow();
                 customer.Show();
             });
 

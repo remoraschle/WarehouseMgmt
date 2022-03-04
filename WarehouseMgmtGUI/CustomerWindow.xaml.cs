@@ -12,22 +12,45 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WarehouseMgmtBL;
 
 namespace WarehouseMgmtGUI
 {
     /// <summary>
     /// Interaktionslogik für Customer.xaml
     /// </summary>
-    public partial class Customer : Window
+    public partial class CustomerWindow : Window
     {
-        public Customer()
+        OrderBLL orderBLL = new OrderBLL();
+        public CustomerWindow()
         {
             InitializeComponent();
+
+            ReturnSelectedCustomerButton.Visibility = Visibility.Hidden;
         }
+
+
+        public CustomerWindow(OrderBLL orderBLL)
+        {
+            InitializeComponent();
+
+            this.orderBLL = orderBLL;
+
+            this.DataContext = new CustomerWindowViewModel(orderBLL);
+
+        }
+
+
+
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+        private void ReturnSelectedCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            //articleBLL.ArticleGroupId = Convert.ToInt32(ArticleGroupIdTextBox.Text);
+            this.Close();
         }
     }
 }

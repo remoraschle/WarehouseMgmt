@@ -40,6 +40,16 @@ namespace WarehouseMgmtDB
             }
         }
 
+        public static string GetOrderCustomerFullName(int id)
+        {
+            using (var context = new WarehouseContext())
+            {
+                string first = context.Customers.Where(x => x.Id == id).Select(x => x.FirstName).FirstOrDefault();
+                string last = context.Customers.Where(x => x.Id == id).Select(x => x.LastName).FirstOrDefault();
+                return first + " " + last;
+            }
+        }
+
      
 
         public static List<Orders> GetAllOrders()
@@ -76,7 +86,7 @@ namespace WarehouseMgmtDB
             return GetAllOrdersFromDate(Convert.ToDateTime(date.ToShortDateString()), Convert.ToDateTime(date.AddDays(1).ToShortDateString()));
         }
 
-        public int AddOrder(DateTime date, int customerId, int orderPositionsId)
+        public int AddOrder(DateTime date, int customerId, int? orderPositionsId)
         {
             using (var context = new WarehouseContext())
             {
@@ -102,6 +112,7 @@ namespace WarehouseMgmtDB
                 var order = context.Orders.Where(x => x.Id == orderChanges.Id).FirstOrDefault();
 
                 order.Date = orderChanges.Date;
+                order.CustomerId = orderChanges.CustomerId;
 
                 int count = context.SaveChanges();
                 if (count > 0)
