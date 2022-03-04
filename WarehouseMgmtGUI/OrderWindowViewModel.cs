@@ -19,7 +19,7 @@ namespace WarehouseMgmtGUI
                 //Will be called on button click
 
                 OrderBLL ord = new OrderBLL();
-                int id = ord.AddOrder(DateTime.Now, newOrder.CustomerId, newOrder.OrderPositionsId);
+                int id = ord.AddOrder(DateTime.Now, newOrder.CustomerId);
                 newOrder.Id = id;
                 this.Orders.Add(newOrder);
                 NewOrder = new OrderBLL();
@@ -40,8 +40,7 @@ namespace WarehouseMgmtGUI
                         Id = NewOrder.Id,
                         Date = NewOrder.Date,
                         CustomerId = NewOrder.CustomerId,
-                        CustomerName = NewOrder.CustomerName,
-                        OrderPositionsId = NewOrder.OrderPositionsId
+                        CustomerName = NewOrder.CustomerName
                     };
 
 
@@ -113,8 +112,7 @@ namespace WarehouseMgmtGUI
                         Id = NewOrder.Id,
                         Date = NewOrder.Date,
                         CustomerId = NewOrder.CustomerId,
-                        CustomerName = NewOrder.CustomerName,
-                        OrderPositionsId = NewOrder.OrderPositionsId
+                        CustomerName = NewOrder.CustomerName
                     };
                 }
 
@@ -157,8 +155,7 @@ namespace WarehouseMgmtGUI
                             Id = selectedOrder.Id,
                             Date = selectedOrder.Date,
                             CustomerId = selectedOrder.CustomerId,
-                            CustomerName = selectedOrder.CustomerName,
-                            OrderPositionsId = selectedOrder.OrderPositionsId
+                            CustomerName = selectedOrder.CustomerName
                         };
                     }
 

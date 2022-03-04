@@ -66,13 +66,7 @@ namespace WarehouseMgmtDB
                 return context.Orders.Where(x => x.CustomerId == customerId).ToList();
             }
         }
-        public static List<Orders> GetAllOrdersFromOrderPositionsId(int orderPositionsId)
-        {
-            using (var context = new WarehouseContext())
-            {
-                return context.Orders.Where(x => x.OrderPositionsId == orderPositionsId).ToList();
-            }
-        }
+
 
         public static List<Orders> GetAllOrdersFromDate(DateTime date1, DateTime date2)
         {
@@ -86,15 +80,14 @@ namespace WarehouseMgmtDB
             return GetAllOrdersFromDate(Convert.ToDateTime(date.ToShortDateString()), Convert.ToDateTime(date.AddDays(1).ToShortDateString()));
         }
 
-        public int AddOrder(DateTime date, int customerId, int? orderPositionsId)
+        public int AddOrder(DateTime date, int customerId)
         {
             using (var context = new WarehouseContext())
             {
                 var order = new Orders()
                 {
                 Date = date,
-                CustomerId = customerId,
-                OrderPositionsId = orderPositionsId
+                CustomerId = customerId
             };
 
 
@@ -106,33 +99,33 @@ namespace WarehouseMgmtDB
         }
 
 
-        //public int AddOrder(DateTime date, int customerId, List<OrderPositions> orderPositions)
-        //{
-        //    using (var context = new WarehouseContext())
-        //    {
-        //        foreach (var item in orderPositions)
-        //        {
-        //            var op = new OrderPositions()
-        //            {
-        //                ArticleId = item.ArticleId,
-        //                Quantity = item.Quantity
-        //            };
-        //        }
+        public int AddOrder(DateTime date, int customerId, List<OrderPositions> orderPositions)
+        {
+            using (var context = new WarehouseContext())
+            {
+               
 
-        //        var order = new Orders()
-        //        {
-        //            Date = date,
-        //            CustomerId = customerId,
-        //            OrderPositionsId = orderPositionsId
-        //        };
+                var order = new Orders()
+                {
+                    Date = date,
+                    CustomerId = customerId
+                };
 
+                foreach (var item in orderPositions)
+                {
+                    var op = new OrderPositions()
+                    {
+                        ArticleId = item.ArticleId,
+                        Quantity = item.Quantity
+                    };
+                }
 
-        //        context.Orders.Add(order);
-        //        context.SaveChanges();
+                context.Orders.Add(order);
+                context.SaveChanges();
 
-        //        return order.Id;
-        //    }
-        //}
+                return order.Id;
+            }
+        }
 
         public bool EditOrder(Orders orderChanges)
         {
