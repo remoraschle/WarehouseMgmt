@@ -1,4 +1,4 @@
-﻿<Window x:Class="WarehouseMgmtGUI.Customer"
+﻿<Window x:Class="WarehouseMgmtGUI.CustomerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -106,10 +106,13 @@
 
             <Label Content="Password" Grid.Row="9" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"></Label>
             <TextBox Grid.Row="9" Grid.Column="2" Text="{Binding NewCustomer.Password}"  />
-            
-            <!--<Label x:Name="lblSaveTest" Grid.Row="9" Content="{Binding SaveTest}"></Label>      Für was?--> 
-            
-            <Button Content="Add Customer" Grid.Row="11" Grid.Column="2" Command="{Binding AddCustomerCommand}"/>
+
+
+
+            <Button x:Name="ReturnSelectedCustomerButton" Grid.Row="10" Grid.Column="1" Content="USE Selected Customer" Margin="0,0,5,0" Click="ReturnSelectedCustomerButton_Click" Command="{Binding ChangeCustomerInOrdersCommand}"/>
+
+
+            <Button Content="Add Customer" Grid.Row="12" Grid.Column="2" Command="{Binding AddCustomerCommand}"/>
             
             
 

@@ -14,72 +14,62 @@ namespace WarehouseMgmtGUI
     {
         public CustomerWindowViewModel()
         {
-            this.AddCustomerCommand = new DelegateCommand((o) =>
-            {
-                //Will be called on button click
+            this.AddCustomerCommand = new DelegateCommand((o) => AddCustomer());
 
-                CustomerBLL art = new CustomerBLL();
-                int id = art.AddCustomer(newCustomer.FirstName,newCustomer.LastName, newCustomer.Street, newCustomer.Zip, newCustomer.City, newCustomer.Mail, newCustomer.Url, newCustomer.Password);
-                newCustomer.Id = id;
-                this.Customers.Add(newCustomer);
-                NewCustomer = new CustomerBLL();
+            this.SaveCustomerCommand = new DelegateCommand((o) => SaveCustomer());
 
+            this.SearchCustomerCommand = new DelegateCommand((o) => SearchCustomer());
 
-            });
-
-            this.SaveCustomerCommand = new DelegateCommand((o) =>
-            {
-                //Will be called on button click
-
-                if (selectedCustomer != null)
-                {
-                    bool save = selectedCustomer.EditCustomer(newCustomer);
-
-
-                    //// Daten werden in der Liste nicht aktualisiert. Dafür müsste man in der CustomerBLL ebenfalls eine RaisePropertyChanged() implementieren
-                    //var a = Customers.FirstOrDefault(x => x == selectedCustomer);
-                    //a.Name = newCustomer.Name;
-                    //a.Price = newCustomer.Price;
-
-                    NewCustomer = new CustomerBLL();
-                }
-            });
-
-            this.SearchCustomerCommand = new DelegateCommand((o) =>
-            {
-                //Will be called on button click
-
-                CustomerBLL cust = new CustomerBLL();
-
-                var list = cust.GetCustomer(newCustomer.SearchCustomerNumber, newCustomer.SearchCustomerName);
-
-                this.Customers = new ObservableCollection<CustomerBLL>();
-
-                if (list != null)
-                {
-                    foreach (CustomerBLL item in list)
-                    {
-                        this.Customers.Add(item);
-                    }
-                }
-            });
-
-            this.DeleteCustomerCommand = new DelegateCommand((o) =>
-            {
-                //Will be called on button click
-
-                if (selectedCustomer != null)
-                {
-                    bool save = selectedCustomer.DeleteCustomer(newCustomer);
-
-                    Customers.Remove(selectedCustomer);
-
-                    NewCustomer = new CustomerBLL();
-                }
-            });
-
+            this.DeleteCustomerCommand = new DelegateCommand((o) => DeleteCustomer());
 
         }
+
+        public CustomerWindowViewModel(OrderBLL orderBLL)
+        {
+            if (orderBLL != null)
+            {
+
+                this.AddCustomerCommand = new DelegateCommand((o) => AddCustomer());
+
+                this.SaveCustomerCommand = new DelegateCommand((o) => SaveCustomer());
+
+                this.SearchCustomerCommand = new DelegateCommand((o) => SearchCustomer());
+
+                this.DeleteCustomerCommand = new DelegateCommand((o) => DeleteCustomer());
+
+
+                this.ChangeCustomerInOrdersCommand = new DelegateCommand((o) =>
+                {
+                    orderBLL.Customer = NewCustomer;
+                    orderBLL.CustomerId = NewCustomer.Id;
+                    orderBLL.CustomerName = NewCustomer.FirstName + " " + NewCustomer.LastName;
+                });
+
+
+
+                if (orderBLL != null)
+                {
+                    CustomerBLL cust = new CustomerBLL();
+
+                    if (orderBLL.Customer != null)
+                    {
+                        var customer = cust.GetCustomer(orderBLL.CustomerId, null).FirstOrDefault();
+                        if (customer != null)
+                        {
+                            NewCustomer = customer;
+                        }
+                    }
+                    else
+                    {
+                        NewCustomer = cust;
+                    }
+                    
+                }
+            }
+
+        }
+
+
 
         CustomerBLL newCustomer = new CustomerBLL();
 
@@ -148,5 +138,67 @@ namespace WarehouseMgmtGUI
         public DelegateCommand SaveCustomerCommand { get; set; }
         public DelegateCommand SearchCustomerCommand { get; set; }
         public DelegateCommand DeleteCustomerCommand { get; set; }
+        public DelegateCommand ChangeCustomerInOrdersCommand { get; set; }
+
+
+        private void AddCustomer()
+        {
+            CustomerBLL art = new CustomerBLL();
+            int id = art.AddCustomer(newCustomer.FirstName, newCustomer.LastName, newCustomer.Street, newCustomer.Zip, newCustomer.City, newCustomer.Mail, newCustomer.Url, newCustomer.Password);
+            newCustomer.Id = id;
+            this.Customers.Add(newCustomer);
+            NewCustomer = new CustomerBLL();
+        }
+
+        private void SaveCustomer()
+        {
+            if (selectedCustomer != null)
+            {
+                bool save = selectedCustomer.EditCustomer(newCustomer);
+
+
+                //Data in the ListBox are not updating, because there shoud also be a RaisePropertyChanged in CustomerBLL on each Object
+                //therefore we just reload the whole List :-D
+                SearchCustomer();
+
+                //Reselect after reloading
+                SelectedCustomer = NewCustomer;
+            }
+        }
+
+        private void SearchCustomer()
+        {
+            CustomerBLL cust = new CustomerBLL();
+
+            var list = cust.GetCustomer(newCustomer.SearchCustomerNumber, newCustomer.SearchCustomerName);
+
+            this.Customers = new ObservableCollection<CustomerBLL>();
+
+            if (list != null)
+            {
+                foreach (CustomerBLL item in list)
+                {
+                    this.Customers.Add(item);
+                }
+            }
+        }
+
+        private void DeleteCustomer()
+        {
+            if (selectedCustomer != null)
+            {
+                bool save = selectedCustomer.DeleteCustomer(newCustomer);
+
+                Customers.Remove(selectedCustomer);
+
+                //Data in the ListBox are not updating, because there shoud also be a RaisePropertyChanged in CustomerBLL on each Object
+                //therefore we just reload the whole List :-D
+
+                SearchCustomer();
+
+                NewCustomer = new CustomerBLL();
+            }
+        }
+
     }
 }

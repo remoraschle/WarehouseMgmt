@@ -40,7 +40,6 @@ namespace WarehouseMgmtBL
         }
 
         public string SearchArticleName { get; set; }
-        public bool SetChange { get; set; }
 
 
 

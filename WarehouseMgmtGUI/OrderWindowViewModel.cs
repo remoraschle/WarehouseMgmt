@@ -18,8 +18,8 @@ namespace WarehouseMgmtGUI
             {
                 //Will be called on button click
 
-                OrderBLL art = new OrderBLL();
-                int id = art.AddOrder(newOrder.Date, newOrder.CustomerId, newOrder.OrderPositionsId);
+                OrderBLL ord = new OrderBLL();
+                int id = ord.AddOrder(DateTime.Now, newOrder.CustomerId, newOrder.OrderPositionsId);
                 newOrder.Id = id;
                 this.Orders.Add(newOrder);
                 NewOrder = new OrderBLL();
@@ -33,15 +33,37 @@ namespace WarehouseMgmtGUI
 
                 if (selectedOrder != null)
                 {
-                    bool save = selectedOrder.EditOrder(newOrder);
+                    bool save = selectedOrder.EditOrder(NewOrder);
+
+                    NewOrder = new OrderBLL
+                    {
+                        Id = NewOrder.Id,
+                        Date = NewOrder.Date,
+                        CustomerId = NewOrder.CustomerId,
+                        CustomerName = NewOrder.CustomerName,
+                        OrderPositionsId = NewOrder.OrderPositionsId
+                    };
 
 
-                    //// Daten werden in der Liste nicht aktualisiert. Dafür müsste man in der OrderBLL ebenfalls eine RaisePropertyChanged() implementieren
-                    //var a = Orders.FirstOrDefault(x => x == selectedOrder);
-                    //a.Name = newOrder.Name;
-                    //a.Price = newOrder.Price;
+                    //Data in the ListBox are not updating, because there shoud also be a RaisePropertyChanged in OrderBLL on each Object
+                    //therefore we just reload the whole List :-D
 
-                    NewOrder = new OrderBLL();
+                    OrderBLL cust = new OrderBLL();
+
+                    var list = cust.GetOrders(newOrder.SearchOrderNumber, newOrder.SearchOrderDate);
+
+                    this.Orders = new ObservableCollection<OrderBLL>();
+
+                    if (list != null)
+                    {
+                        foreach (OrderBLL item in list)
+                        {
+                            this.Orders.Add(item);
+                        }
+                    }
+
+                    //Reselect after reloading the list
+                    SelectedOrder = NewOrder;
                 }
             });
 
@@ -76,6 +98,26 @@ namespace WarehouseMgmtGUI
 
                     NewOrder = new OrderBLL();
                 }
+            });
+
+            this.SelectCustomerCommand = new DelegateCommand((o) =>
+            {
+                //Will be called on button click
+                if (NewOrder != null)//&& NewOrder.Id != 0
+                {
+                    CustomerWindow customerWindow = new CustomerWindow(NewOrder);
+                    customerWindow.ShowDialog();
+
+                    NewOrder = new OrderBLL
+                    {
+                        Id = NewOrder.Id,
+                        Date = NewOrder.Date,
+                        CustomerId = NewOrder.CustomerId,
+                        CustomerName = NewOrder.CustomerName,
+                        OrderPositionsId = NewOrder.OrderPositionsId
+                    };
+                }
+
             });
 
 
@@ -115,6 +157,7 @@ namespace WarehouseMgmtGUI
                             Id = selectedOrder.Id,
                             Date = selectedOrder.Date,
                             CustomerId = selectedOrder.CustomerId,
+                            CustomerName = selectedOrder.CustomerName,
                             OrderPositionsId = selectedOrder.OrderPositionsId
                         };
                     }
@@ -143,5 +186,6 @@ namespace WarehouseMgmtGUI
         public DelegateCommand SaveOrderCommand { get; set; }
         public DelegateCommand SearchOrderCommand { get; set; }
         public DelegateCommand DeleteOrderCommand { get; set; }
+        public DelegateCommand SelectCustomerCommand { get; set; }
     }
 }

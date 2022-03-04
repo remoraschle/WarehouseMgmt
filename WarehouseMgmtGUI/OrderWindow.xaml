@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WarehouseMgmtGUI"
         mc:Ignorable="d"
-        Title="OrderWindow" Height="450" Width="800">
+        Title="OrderWindow" Height="820" Width="800">
 
     <Window.DataContext>
         <local:OrderWindowViewModel/>
@@ -17,8 +17,10 @@
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"></RowDefinition>
-            <RowDefinition Height="300*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="270"></RowDefinition>
+            <RowDefinition Height="170*"></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Grid.Column="0" >
@@ -49,58 +51,111 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding LastName}" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding CustomerName}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Date}" Margin="0,0,0,5"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
 
-        <Grid Grid.Column="1" Grid.Row="2">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="11*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-            <RowDefinition Height="20px"/>
-        </Grid.RowDefinitions>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+            </Grid.RowDefinitions>
             <Label Content="Order number"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NewOrder.Id}" IsEnabled="False"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NewOrder.Id}" IsReadOnly="True"/>
 
             <Label Content="Date"  Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NewOrder.Date}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NewOrder.Date}" IsReadOnly="True"/>
 
-            <Label Content="Order"  Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NewOrder.Id}"/>
+            <Label Content="Position number"  Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NewOrder.Id}" PreviewTextInput="NumberValidationTextBox" IsReadOnly="True"/>
 
-            <Label Content="Position number"  Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding NewOrder.Id}" PreviewTextInput="NumberValidationTextBox"/>
+            <Label Content="Customer"  Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
+                <TextBox Text="{Binding NewOrder.CustomerName}" Width="150" IsReadOnly="True"/>
+                <Button  Content="Select Customer" Margin="5,0,5,0" Command="{Binding SelectCustomerCommand}" HorizontalAlignment="Right"/>
+            </StackPanel>
 
-            <Label Content="Order"  Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding NewOrder.Id}"/>
-
-            <Label Content="Quantity"  Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
-            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding NewOrder.Id}" PreviewTextInput="NumberValidationTextBox"/>
+            <Label Content="CustomerId"  Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding NewOrder.CustomerId}" PreviewTextInput="NumberValidationTextBox" IsReadOnly="True"/>
 
             <Button Grid.Row="8" Grid.Column="1" Content="Add Order" Margin="0,0,5,0" Command="{Binding AddOrderCommand}"/>
             <Button Grid.Row="10" Grid.Column="1" Content="Change Order" Margin="0,0,5,0" Command="{Binding SaveOrderCommand}"/>
             <Button Grid.Row="12" Grid.Column="1" Content="Delete Order" Margin="0,0,5,0" Command="{Binding DeleteOrderCommand}"/>
         </Grid>
-    </Grid>    
+
+
+        <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="OrderPosition number"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NewOrderPosition.Id}" IsEnabled="False"/>
+
+            <Label Content="Article"  Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NewOrderPosition.ArticleName}" Width="150"  IsReadOnly="True"/>
+                <Button  Content="Select Article" Margin="5,0,5,0" Command="{Binding SelectArticleCommand}" HorizontalAlignment="Right"/>
+            </StackPanel>
+
+            <Label Content="ArticleId"  Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NewOrderPosition.ArticleId}"/>
+
+            <Label Content="Quantity"  Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding NewOrderPosition.Quantiry}"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Right">
+                <Button Grid.Row="8" Grid.Column="1" Content="Add OrderPosition" Margin="0,0,5,0" Command="{Binding AddOrderPositionCommand}"/>
+                <Button Grid.Row="10" Grid.Column="1" Content="Change OrderPosition" Margin="0,0,5,0" Command="{Binding SaveOrderPositionCommand}"/>
+                <Button Grid.Row="12" Grid.Column="1" Content="Delete OrderPosition" Margin="0,0,5,0" Command="{Binding DeleteOrderPositionCommand}"/>
+            </StackPanel>
+
+        </Grid>
+
+        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding OrderPositions}" SelectedItem="{Binding SelectedOrderPositions}" Grid.ColumnSpan="2" Margin="0,13,0,0" Grid.RowSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ArticleName}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Quantity}" Margin="0,0,0,5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
 </Window>
