@@ -1,0 +1,90 @@
+﻿<Window x:Class="WarehouseMgmtGUI.BillViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarehouseMgmtGUI"
+        mc:Ignorable="d"
+        Title="BillViewWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:BillViewWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="270*"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+                <RowDefinition Height="20px"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="OrderPosition number"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NewOrderPosition.Id}" IsEnabled="False"/>
+
+            <Label Content="Article"  Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NewOrderPosition.ArticleName}" Width="150"  IsReadOnly="True"/>
+                <Button  Content="Select Article" Margin="5,0,5,0" Command="{Binding SelectArticleCommand}" HorizontalAlignment="Right"/>
+            </StackPanel>
+
+            <Label Content="ArticleId"  Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NewOrderPosition.ArticleId}"/>
+
+            <Label Content="Quantity"  Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding NewOrderPosition.Quantiry}"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Right">
+                <Button Grid.Row="8" Grid.Column="1" Content="Search" Margin="0,0,5,0" Command="{Binding SearchBillViewGroupCommand}"/>
+                
+            </StackPanel>
+
+        </Grid>
+
+        <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding BillViewGroups}" SelectedItem="{Binding NewBillView}" Grid.ColumnSpan="2" Margin="0,13,0,0" Grid.RowSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Customer ID: "/>
+                        <TextBlock Text="{Binding CustomerId}" FontWeight="Bold"/>
+                        <TextBlock Text="   Customer Name: "/>
+                        <TextBlock Text="{Binding CustomerName}" FontWeight="Bold"/>
+                        <TextBlock Text="   Street: "/>
+                        <TextBlock Text="{Binding Street}" Margin="0,0,0,5"/>
+                        <TextBlock Text="   Zip: "/>
+                        <TextBlock Text="{Binding Zip}" Margin="0,0,0,5"/>
+                        <TextBlock Text="   City: "/>
+                        <TextBlock Text="{Binding City}" Margin="0,0,0,5"/>
+                        <TextBlock Text="   Bill Date: "/>
+                        <TextBlock Text="{Binding BillDate}" Margin="0,0,0,5"/>
+                        <TextBlock Text="   Bill Number: "/>
+                        <TextBlock Text="{Binding BillNumber}" Margin="0,0,0,5"/>
+                        <TextBlock Text="   Brutto: "/>
+                        <TextBlock Text="{Binding BillCostBrutto}" Margin="0,0,0,5"/>
+                        <TextBlock Text="   Netto: "/>
+                        <TextBlock Text="{Binding BillCostNetto}" Margin="0,0,0,5"/>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</Window>
