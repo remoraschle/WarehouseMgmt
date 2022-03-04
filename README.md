@@ -6,7 +6,9 @@ www.youtube.com/.........
 
 
 
-## SQL - Reqursive Hierarchy for ArticleGroups
+## SQL
+
+### Reqursive Hierarchy for ArticleGroups
 ```md
 
 
@@ -36,3 +38,6 @@ SELECT	ArticleGroupId ,
 FROM CTE_ArticleGroupHierarchy
 GO
 ```
+
+
+## known issues
