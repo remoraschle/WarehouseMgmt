@@ -99,31 +99,48 @@ namespace WarehouseMgmtDB
         }
 
 
-        public int AddOrder(DateTime date, int customerId, List<OrderPositions> orderPositions)
+        public int AddOrder(DateTime date, int customerId, List<Article> articles)
         {
             using (var context = new WarehouseContext())
             {
-               
-
                 var order = new Orders()
                 {
                     Date = date,
                     CustomerId = customerId
                 };
 
-                foreach (var item in orderPositions)
-                {
-                    var op = new OrderPositions()
-                    {
-                        ArticleId = item.ArticleId,
-                        Quantity = item.Quantity
-                    };
-                }
-
                 context.Orders.Add(order);
                 context.SaveChanges();
 
                 return order.Id;
+            }
+        }
+
+        public int AddArticlesToOrder(List<OrderPositions> orderPositions)
+        {
+            using (var context = new WarehouseContext())
+            {
+                foreach (var item in orderPositions)
+                {
+                    int countOrderPossitions = context.OrderPositions.Where(x => x.OrderId == item.OrderId && x.ArticleId == item.ArticleId).Count();
+
+                    //insert only if the constelation does not exist! 
+                    if (countOrderPossitions == 0)
+                    {
+                        var op = new OrderPositions()
+                        {
+                            OrderId = item.OrderId,
+                            ArticleId = item.ArticleId,
+                            Quantity = item.Quantity
+                        };
+                        context.OrderPositions.Add(op);
+                    }
+                    
+                }
+
+                int count = context.SaveChanges();
+
+                return count;
             }
         }
 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseMgmtDB.Model;
 
 namespace WarehouseMgmtBL
 {
-    class OrderPositionsBLL
+    public class OrderPositionsBLL: OrderPositions
     {
     }
 }
