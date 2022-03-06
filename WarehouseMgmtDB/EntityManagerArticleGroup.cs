@@ -62,6 +62,54 @@ namespace WarehouseMgmtDB
             }
         }
 
+        public static List<ArticleGroup> GetAllParentArticleGroup()
+        {
+            using (var context = new WarehouseContext())
+            {
+                return context.ArticleGroups.Where(x=>x.ArticleGroupParentId == null).ToList();
+            }
+        }
+
+        private string ArticleGroupTree { get; set; }
+        private int ArticleGroupTreeDeep { get; set; }
+        public string GetArticleGroupTree(int? id)
+        {
+            using (var context = new WarehouseContext())
+            {
+                //Parent
+                ArticleGroup ag = context.ArticleGroups.Where(x => x.Id == id).FirstOrDefault();
+
+
+                if (ag != null)
+                {
+                    ArticleGroupTreeDeep++;
+                    string deep = "";
+                    for (int i = 0; i < ArticleGroupTreeDeep; i++)
+                    {
+                        deep += "    ";
+                    }
+                    ArticleGroupTree += ag.Name + deep + Environment.NewLine;
+
+                    var childsCount = context.ArticleGroups.Where(x => x.ArticleGroupParentId == ag.Id).FirstOrDefault();
+
+                    if (childsCount != null)
+                    {
+
+                        var childs = context.ArticleGroups.Where(x => x.ArticleGroupParentId == ag.Id);
+
+                        foreach (var item in childs)
+                        {
+                            GetArticleGroupTree(item.Id);
+                        }
+                    }
+
+
+                }
+                
+                return ArticleGroupTree;
+            }
+        }
+
         /// <summary>
         /// If there is no ParentGroup, then articleGroupParentId shoud be NULL
         /// </summary>
