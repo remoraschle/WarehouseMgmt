@@ -99,22 +99,6 @@ namespace WarehouseMgmtDB
         }
 
 
-        public int AddOrder(DateTime date, int customerId, List<Article> articles)
-        {
-            using (var context = new WarehouseContext())
-            {
-                var order = new Orders()
-                {
-                    Date = date,
-                    CustomerId = customerId
-                };
-
-                context.Orders.Add(order);
-                context.SaveChanges();
-
-                return order.Id;
-            }
-        }
 
         public int AddArticlesToOrder(List<OrderPositions> orderPositions)
         {
