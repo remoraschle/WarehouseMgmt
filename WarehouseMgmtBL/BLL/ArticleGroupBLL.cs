@@ -16,6 +16,7 @@ namespace WarehouseMgmtBL
         public string SearchArticleGroupName { get; set; }
 
         public string ArticleGroupParentName { get; set; }
+        public string ArticleGroupTree { get; set; }
 
 
         /// <summary>
@@ -57,7 +58,14 @@ namespace WarehouseMgmtBL
             }
 
 
+            return ConvertArticleGroupToBLL(articleGroup);
 
+
+
+        }
+
+        private static List<ArticleGroupBLL> ConvertArticleGroupToBLL(List<ArticleGroup> articleGroup)
+        {
             List<ArticleGroupBLL> list = new List<ArticleGroupBLL>();
 
             foreach (var v in articleGroup)
@@ -66,12 +74,11 @@ namespace WarehouseMgmtBL
                 articleGroupBLL.Id = v.Id;
                 articleGroupBLL.Name = v.Name;
                 articleGroupBLL.ArticleGroupParentId = v.ArticleGroupParentId;
-                
+
                 list.Add(articleGroupBLL);
             }
 
             return list;
-
         }
 
 
@@ -80,7 +87,7 @@ namespace WarehouseMgmtBL
         /// returns the articleGroup with the specifed articleGroup id
         /// </summary>
         /// <param name="id"></param>
-        public ArticleGroupBLL GetArticleGroupByArticleGroupID(int id)
+        public ArticleGroupBLL  GetArticleGroupByArticleGroupID(int id)
         {
             return (ArticleGroupBLL)EntityManagerArticleGroup.GetFirstArticleGroup(id);
         }
@@ -136,6 +143,20 @@ namespace WarehouseMgmtBL
         {
             EntityManagerArticleGroup entity = new EntityManagerArticleGroup();
             return entity.DeleteArticleGroup(articleGroup);
+        }
+
+        public static List<ArticleGroupBLL> GetArticleGroupTree()
+        {
+            List<ArticleGroupBLL> articleGroupBLLs = ConvertArticleGroupToBLL(EntityManagerArticleGroup.GetAllParentArticleGroup());
+
+            foreach (var item in articleGroupBLLs)
+            {
+                EntityManagerArticleGroup emag = new EntityManagerArticleGroup();
+                item.ArticleGroupTree = emag.GetArticleGroupTree(item.Id);
+            }
+
+
+            return articleGroupBLLs;
         }
     }
 }

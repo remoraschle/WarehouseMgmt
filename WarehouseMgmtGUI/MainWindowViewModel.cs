@@ -37,10 +37,17 @@ namespace WarehouseMgmtGUI
                 orderWindow.Show();
             });
 
-            this.ViewsCommand = new DelegateCommand((o) =>
+            this.BillViewsCommand = new DelegateCommand((o) =>
             {
                 BillViewWindow billViewWindow = new BillViewWindow();
                 billViewWindow.Show();
+
+            });
+
+            this.ArticleGroupViewsCommand = new DelegateCommand((o) =>
+            {
+                ArticleGroupTreeView articleGroupViewWindow = new ArticleGroupTreeView();
+                articleGroupViewWindow.Show();
 
             });
 
@@ -100,7 +107,8 @@ namespace WarehouseMgmtGUI
         public DelegateCommand ArticleCommand { get; set; }
         public DelegateCommand ArticleGroupsCommand { get; set; }
         public DelegateCommand OrdersCommand { get; set; }
-        public DelegateCommand ViewsCommand { get; set; }
+        public DelegateCommand BillViewsCommand { get; set; }
+        public DelegateCommand ArticleGroupViewsCommand { get; set; }
         public DelegateCommand TestDataCommand { get; set; }
 
 

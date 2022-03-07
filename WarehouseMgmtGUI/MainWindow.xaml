@@ -29,7 +29,11 @@
         <Button Grid.Column="1" Content="Article" Command="{Binding ArticleCommand}" Margin="5,5,5,5"/>
         <Button Grid.Column="2" Content="ArticleGroups" Command="{Binding ArticleGroupsCommand}" Margin="5,5,5,5"/>
         <Button Grid.Column="3" Content="Orders" Command="{Binding OrdersCommand}" Margin="5,5,5,5"/>
-        <Button Grid.Column="0" Grid.Row="1" Content="Views" Command="{Binding ViewsCommand}" Margin="5,5,5,5"/>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
+            <Button  Content="Bill View" Command="{Binding BillViewsCommand}" Margin="5,5,5,5"/>
+            <Button  Content="Article Group Tree" Command="{Binding ArticleGroupViewsCommand}" Margin="5,5,5,5"/>
+        </StackPanel>
+        
         <Button Grid.Column="1" Grid.Row="1" Content="Add TestData" Command="{Binding TestDataCommand}" Margin="5,5,5,5" />
 
 

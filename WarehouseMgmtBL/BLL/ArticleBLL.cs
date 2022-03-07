@@ -80,8 +80,8 @@ namespace WarehouseMgmtBL
                     article = EntityManagerArticle.GetAllArticle();
                 }
             }
-               
-            
+
+
 
             List<ArticleBLL> list = new List<ArticleBLL>();
             EntityManagerArticle entityManagerArticle = new EntityManagerArticle();
@@ -94,7 +94,7 @@ namespace WarehouseMgmtBL
                 articleBLL.Price = v.Price;
                 articleBLL.ArticleGroupId = v.ArticleGroupId;
 
-                
+
                 articleBLL.ArticleGroupName = entityManagerArticle.GetArticleGroupName(articleBLL.ArticleGroupId);//v.ArticleGroup.Name; --> Not possible because of Lazy loading
 
                 list.Add(articleBLL);
@@ -115,7 +115,7 @@ namespace WarehouseMgmtBL
             return (ArticleBLL)EntityManagerArticle.GetFirstArticle(id);
         }
 
-       
+
 
         /// <summary>
         /// returns all articles with Articlename like name
@@ -127,7 +127,7 @@ namespace WarehouseMgmtBL
         }
 
 
-        
+
 
         ///// <summary>
         ///// returns all articles with the ArticleGroupId
@@ -180,6 +180,7 @@ namespace WarehouseMgmtBL
 
         //    return articleBBL;
         //}
+        
 
 
     }
