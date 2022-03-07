@@ -61,10 +61,12 @@ namespace WarehouseMgmtDB
                         {
                             billsView.BillCostBrutto = (from op in context3.OrderPositions
                                                         join article in context3.Articles on op.ArticleId equals article.Id
-                                                        select new { op, article }).Sum(x => x.article.Price);
+                                                        where op.OrderId == billsView.BillNumber
+                                                        select new { op, article }).Sum(x => x.article.Price* x.op.Quantity);
                         }
 
-                        billsView.BillCostNetto = 0;
+                        // + 5 % from Brutto
+                        billsView.BillCostNetto = billsView.BillCostBrutto + (billsView.BillCostBrutto/100*5);
 
                         billsViews.Add(billsView);
                     }
