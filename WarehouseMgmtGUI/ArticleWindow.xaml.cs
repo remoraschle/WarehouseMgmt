@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WarehouseMgmtBL;
 
 namespace WarehouseMgmtGUI
 {
@@ -20,18 +21,34 @@ namespace WarehouseMgmtGUI
     /// </summary>
     public partial class ArticleWindow : Window
     {
+        OrderPositionsBLL orderPositionBLL = new OrderPositionsBLL();
+
         public ArticleWindow()
         {
             InitializeComponent();
         }
 
+        public ArticleWindow(OrderPositionsBLL orderPositionBLL)
+        {
+            InitializeComponent();
+
+            this.orderPositionBLL = orderPositionBLL;
+
+            this.DataContext = new ArticleWindowViewModel(orderPositionBLL);
+
+        }
+
+
+
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
-
-
+        }
+        private void ReturnSelectedArticleButton_Click(object sender, RoutedEventArgs e)
+        {
+            //articleBLL.ArticleGroupId = Convert.ToInt32(ArticleGroupIdTextBox.Text);
+            this.Close();
         }
     }
 }
