@@ -90,7 +90,7 @@ GO
 			WHEN OMonth = 9 THEN 'Q3'
 			WHEN OMonth = 10 THEN 'Q4'
 			WHEN OMonth = 11 THEN 'Q4'
-			WHEN OMonth = 12 THEN 'Q'
+			WHEN OMonth = 12 THEN 'Q4'
 		END AS Quartal
 	FROM 
 		CTE_Sales
