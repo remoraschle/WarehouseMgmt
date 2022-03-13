@@ -118,7 +118,7 @@
 
             <Button Content="Change Customer" Grid.Row="14" Grid.Column="2" Command="{Binding SaveCustomerCommand}"/> <!--Command noch anpassen-->
 
-            <Button Content="Delete Customer" Grid.Row="16" Grid.Column="2" Command="{Binding DeleteCommand}"/>
+            <Button Content="Delete Customer" Grid.Row="16" Grid.Column="2" Command="{Binding DeleteCustomerCommand}"/>
         </Grid>
         
     </Grid>
