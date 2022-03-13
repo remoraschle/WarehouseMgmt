@@ -2,7 +2,7 @@
 
 ## instruction
 
-www.youtube.com/.........
+https://youtu.be/3UaKNvHhxvo
 
 
 
@@ -97,3 +97,7 @@ GO
 ```
 
 ## known issues
+
+-TreeView in WPF
+
+-PIVOT VIEW
