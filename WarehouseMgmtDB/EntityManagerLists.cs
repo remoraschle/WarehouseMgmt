@@ -11,7 +11,7 @@ namespace WarehouseMgmtDB
 {
     public class EntityManagerLists
     {
-        public static List<BillsView> GetBills()
+        public static List<BillsView> GetBills(int? customerId)
         {
             using (var context = new WarehouseContext())
             {
@@ -20,6 +20,11 @@ namespace WarehouseMgmtDB
                 var view = (from order in context.Orders
                            join customer in context.Customers on order.CustomerId equals customer.Id
                            select new { order, customer});
+
+                if (customerId != null)
+                {
+                    view = view.Where(x=>x.customer.Id == customerId);
+                }
 
                 foreach (var item in view)
                 {

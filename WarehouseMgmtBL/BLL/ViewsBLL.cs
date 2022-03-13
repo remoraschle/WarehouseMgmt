@@ -10,9 +10,11 @@ namespace WarehouseMgmtBL.BLL
 {
     public class ViewsBLL : BillsView
     {
-        public static List<ViewsBLL> GetBillView()
+        public int? SearchCustomerId { get; set; }
+
+        public static List<ViewsBLL> GetBillView(int? customerId)
         {
-            var viewsBill = EntityManagerLists.GetBills();
+            var viewsBill = EntityManagerLists.GetBills(customerId);
 
             List<ViewsBLL> viewsBLLList = new List<ViewsBLL>();
             foreach (var item in viewsBill)
